@@ -3,7 +3,7 @@ import { DuplicateEmail, EmailNotFound, IncorrectPassword, InvalidEmail, Invalid
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IHashManager } from "../model/IHashManager"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { InputSignUpDTO, LoginInputDTO, User, USER_ROLES } from "../model/User"
+import { inputSignUpDTO, loginInputDTO, User, USER_ROLES } from "../model/User"
 import { UserRepository } from "../model/UserRepository"
 
 
@@ -15,7 +15,7 @@ export class UserBusiness {
         private authenticator: IAuthenticator
     ) {}
 
-    async signup (input: InputSignUpDTO): Promise<string> {
+    async signup (input: inputSignUpDTO): Promise<string> {
         try {
             if (!input.name) {
                 throw new MissingUserName()
@@ -58,7 +58,7 @@ export class UserBusiness {
     }
 
 
-    async login (input: LoginInputDTO): Promise<string> {
+    async login (input: loginInputDTO): Promise<string> {
         try {
             if (!input.email) {
                 throw new MissingEmail()

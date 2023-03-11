@@ -11,3 +11,10 @@ export class Band {
         this.responsible = responsible       
     }
 }
+
+export interface inputCreateBandDTO {
+    name: string,
+    musicGenre: string,
+    responsible: string,
+    token: string
+}
