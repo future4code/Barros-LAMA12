@@ -1,5 +1,10 @@
 export class Band {
-    constructor (private id: string, private name: string, private music_genre: string, private responsible: string) {
+    constructor (
+        public readonly id: string,
+        public readonly name: string,
+        public readonly music_genre: string,
+        public readonly responsible: string
+    ) {
         this.id = id
         this.name = name
         this.music_genre = music_genre

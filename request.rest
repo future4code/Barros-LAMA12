@@ -1,2 +1,19 @@
-GET http://localhost:3003/test
+POST http://localhost:3003/users/signup
 Content-Type: application/json
+
+{
+    "name": "Francine Hahn",
+    "email": "fran_hahn@hotmail.com",
+    "password": "12345678",
+    "role": "NORMAL"
+}
+
+
+###
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "fran_hahn@hotmail.com",
+    "password": "12345678"
+}

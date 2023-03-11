@@ -1,5 +1,5 @@
 import { app } from "./app"
+import { userRouter } from "./route/userRouter"
 
-app.get("/test", () => {
-    console.log("Testando...")
-})
+
+app.use("/users", userRouter)
