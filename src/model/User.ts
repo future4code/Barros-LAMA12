@@ -19,14 +19,14 @@ export class User {
     }
 }
 
-export interface InputSignUpDTO {
+export interface inputSignUpDTO {
     email: string,
     password: string,
     name: string,
     role: string
 }
 
-export interface LoginInputDTO {
+export interface loginInputDTO {
     email: string,
     password: string
 }

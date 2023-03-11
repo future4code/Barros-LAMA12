@@ -7,6 +7,12 @@ export class Unauthorized extends CustomError {
     }
 }
 
+export class MissingToken extends CustomError {
+    constructor () {
+        super (422, "Provide the token.")
+    }
+}
+
 export class MissingUserName extends CustomError {
     constructor () {
         super (422, "Provide the user name.")

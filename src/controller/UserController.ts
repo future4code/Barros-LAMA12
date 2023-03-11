@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
-import { InputSignUpDTO, LoginInputDTO } from "../model/User"
+import { inputSignUpDTO, loginInputDTO } from "../model/User"
 
 
 export class UserController {
@@ -8,7 +8,7 @@ export class UserController {
 
     async signup (req: Request, res: Response): Promise<void> {
         try {
-            const input: InputSignUpDTO = {
+            const input: inputSignUpDTO = {
                 email: req.body.email,
                 name: req.body.name,
                 password: req.body.password,
@@ -27,7 +27,7 @@ export class UserController {
 
     async login (req: Request, res: Response): Promise<void> {
         try {
-            const input: LoginInputDTO = {
+            const input: loginInputDTO = {
                 email: req.body.email,
                 password: req.body.password
             }
