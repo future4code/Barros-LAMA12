@@ -4,11 +4,29 @@ export enum USER_ROLES {
 }
 
 export class User {
-    constructor (private id: string, private name: string, private email: string, private password: string, private role: USER_ROLES) {
+    constructor (
+        public readonly id: string,
+        public readonly name: string,
+        public readonly email: string,
+        public readonly password: string,
+        public readonly role: USER_ROLES
+    ) {
         this.id = id
         this.name = name
         this.email = email
         this.password = password
         this.role = role        
     }
+}
+
+export interface InputSignUpDTO {
+    email: string,
+    password: string,
+    name: string,
+    role: string
+}
+
+export interface LoginInputDTO {
+    email: string,
+    password: string
 }
