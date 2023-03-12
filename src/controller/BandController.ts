@@ -1,6 +1,6 @@
 import { BandBusiness } from "../business/BandBusiness"
 import { Request, Response } from "express"
-import { inputCreateBandDTO } from "../model/Band"
+import { inputCreateBandDTO, inputGetBandInfoDTO } from "../model/Band"
 
 
 export class BandController {
@@ -18,6 +18,23 @@ export class BandController {
             await this.bandBusiness.createBand(input)
 
             res.status(201).send("Band created successfully!")
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+
+    async getBandInfo (req: Request, res: Response): Promise<void> {
+        try {
+            const input: inputGetBandInfoDTO = {
+                id: req.query.id as string,
+                name: req.query.name as string,
+                token: req.headers.authorization as string
+            }
+
+            const result = await this.bandBusiness.getBandInfo(input)
+            res.status(200).send(result)
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)

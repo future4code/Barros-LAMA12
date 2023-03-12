@@ -18,3 +18,9 @@ export interface inputCreateBandDTO {
     responsible: string,
     token: string
 }
+
+export interface inputGetBandInfoDTO {
+    id: string,
+    name: string,
+    token: string
+}
