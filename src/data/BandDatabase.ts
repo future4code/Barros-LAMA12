@@ -16,7 +16,7 @@ export class BandDatabase extends BaseDatabase implements BandRepository {
     }
 
 
-    async getBandBy (column: string, value: string): Promise<Band | undefined> {
+    async getBandBy (column: string, value: string): Promise<any> {
         try {
             const result = await BaseDatabase.connection(this.TABLE_NAME).select().where(column, value)
             return result[0]

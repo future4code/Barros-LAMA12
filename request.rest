@@ -15,18 +15,24 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "fran_hahn@hotmail.com",
+    "email": "jp.soares@gmail.com",
     "password": "12345678"
 }
 
 
 ### CREATE BAND
 POST http://localhost:3003/bands/create
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODU3MjM0MywiZXhwIjoxNjc4NTc1OTQzfQ.JVUW-f-3n9SMnuf8NserIB0CB1Ngn8qSN_LOZtj7w7o
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODYyODQ1OCwiZXhwIjoxNjc4NjMyMDU4fQ.hDgRmXbjhMlVoscU7lDHkt1KdeynqlhYfMT7Y4f-Bo4
 Content-Type: application/json
 
 {
-    "name": "Jota Quest",
+    "name": "Skank",
     "musicGenre": "Pop Rock",
-    "responsible": "Rogério Flausino"
+    "responsible": "Samuel Rosa"
 }
+
+
+### GET BAND INFO
+GET http://localhost:3003/bands/info?name=skank
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5MmU5OGU4LTMzNDItNGYzMC05ZDIwLTc4NTE1ZWM4YzJkNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzg2MjgxOTQsImV4cCI6MTY3ODYzMTc5NH0.5L7z25cZ5iUVxRzqt1gZzJ-noYvXdTcUeJO43IWvFUU
+Content-Type: application/json
