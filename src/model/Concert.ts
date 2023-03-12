@@ -13,3 +13,11 @@ export class Concert {
         this.band_id = band_id       
     }
 }
+
+export interface inputCreateConcertDTO {
+    weekDay: string,
+    startTime: string,
+    endTime: string,
+    bandId: string,
+    token: string
+}

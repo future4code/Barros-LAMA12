@@ -22,13 +22,13 @@ Content-Type: application/json
 
 ### CREATE BAND
 POST http://localhost:3003/bands/create
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODYyODQ1OCwiZXhwIjoxNjc4NjMyMDU4fQ.hDgRmXbjhMlVoscU7lDHkt1KdeynqlhYfMT7Y4f-Bo4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODYzNTAyMCwiZXhwIjoxNjc4NjM4NjIwfQ.cmZc9EXnZ52v4yQdK9-0dEdfc6m0PQoPVRjFxquHM8o
 Content-Type: application/json
 
 {
-    "name": "Skank",
-    "musicGenre": "Pop Rock",
-    "responsible": "Samuel Rosa"
+    "name": "Calypso",
+    "musicGenre": "Calypso",
+    "responsible": "Joelma"
 }
 
 
@@ -36,3 +36,16 @@ Content-Type: application/json
 GET http://localhost:3003/bands/info?name=skank
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5MmU5OGU4LTMzNDItNGYzMC05ZDIwLTc4NTE1ZWM4YzJkNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzg2MjgxOTQsImV4cCI6MTY3ODYzMTc5NH0.5L7z25cZ5iUVxRzqt1gZzJ-noYvXdTcUeJO43IWvFUU
 Content-Type: application/json
+
+
+### CREATE CONCERT
+POST http://localhost:3003/concerts/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODYzNTAyMCwiZXhwIjoxNjc4NjM4NjIwfQ.cmZc9EXnZ52v4yQdK9-0dEdfc6m0PQoPVRjFxquHM8o
+Content-Type: application/json
+
+{
+    "weekDay": "saturday",
+    "startTime": "9:00:00",
+    "endTime": "10:00:00",
+    "bandId": "6de48ecb-3583-4a73-bab1-3161a5ca4884"
+}
