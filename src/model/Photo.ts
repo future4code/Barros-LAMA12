@@ -17,3 +17,8 @@ export interface inputCreatePhotoDTO {
     weekDay: string,
     token: string
 }
+
+export interface inputGetAllPhotosDTO {
+    weekDay: string,
+    token: string
+}
