@@ -45,6 +45,13 @@ const createTables = () => connection.raw(`
         FOREIGN KEY(user_id) REFERENCES LAMA_USERS(id),
         FOREIGN KEY(ticket_id) REFERENCES LAMA_TICKETS(id)
     );
+
+    CREATE TABLE IF NOT EXISTS LAMA_PHOTOS (
+        id CHAR(36) NOT NULL PRIMARY KEY,
+        photo_url VARCHAR(255) NOT NULL,
+        week_day VARCHAR(30) NOT NULL,
+        created_at DATE NOT NULL
+    );
 `).then(() => {
     console.log('Tabelas criadas.')
     connection.destroy()
