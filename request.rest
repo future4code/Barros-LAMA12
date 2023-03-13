@@ -97,3 +97,9 @@ Content-Type: application/json
 GET http://localhost:3003/photos?weekDay=sunday
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyODYwMiwiZXhwIjoxNjc4NzMyMjAyfQ.1RA9o7TjMn65hVNczQy_jX69gFgzy6hJ7gmMYH-a7pQ
 Content-Type: application/json
+
+
+### DELETE PHOTO
+DELETE http://localhost:3003/photos/7b348645-40fb-4191-9a63-4981a2f20c86
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyODYwMiwiZXhwIjoxNjc4NzMyMjAyfQ.1RA9o7TjMn65hVNczQy_jX69gFgzy6hJ7gmMYH-a7pQ
+Content-Type: application/json
