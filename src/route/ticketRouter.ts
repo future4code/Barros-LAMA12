@@ -14,3 +14,4 @@ const ticketBusiness = new TicketBusiness(ticketDatabase, new ConcertDatabase(),
 const ticketController = new TicketController(ticketBusiness)
 
 ticketRouter.post("/create", (req, res) => ticketController.createTicket(req, res))
+ticketRouter.post("/purchase", (req, res) => ticketController.purchaseTicket(req, res))

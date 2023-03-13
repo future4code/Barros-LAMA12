@@ -1,6 +1,6 @@
 import { CustomError } from "../error/CustomError";
 import { Band } from "../model/Band";
-import { BandRepository } from "../model/BandRepository";
+import { BandRepository } from "../model/Repositories/BandRepository";
 import { BaseDatabase } from "./BaseDatabase";
 
 

@@ -1,4 +1,4 @@
-import { Band } from "./Band"
+import { Band } from "../Band"
 
 
 export interface BandRepository {

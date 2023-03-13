@@ -2,7 +2,7 @@ import { BandIdNotFound, BandNameNotFound, DuplicateBandName, InvalidBandInfo, M
 import { CustomError } from "../error/CustomError"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { Band, inputCreateBandDTO, inputGetBandInfoDTO } from "../model/Band"
-import { BandRepository } from "../model/BandRepository"
+import { BandRepository } from "../model/Repositories/BandRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
 import { USER_ROLES } from "../model/User"
