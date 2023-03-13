@@ -1,9 +1,9 @@
 import { BandIdNotFound } from "../error/BandErrors"
-import { DuplicateConcert, InvalidConcertDuration, InvalidConcertTime, InvalidEndTime, InvalidStartTime, InvalidWeekDay, MissingBandId, MissingEndTime, MissingStartTime } from "../error/ConcertErrors"
+import { DuplicateConcert, InvalidConcertDuration, InvalidConcertTime, InvalidEndTime, InvalidStartTime, InvalidWeekDay, MissingBandId, MissingEndTime, MissingStartTime, MissingWeekDay, NoConcertsRegistered } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { BandRepository } from "../model/BandRepository"
-import { Concert, inputCreateConcertDTO } from "../model/Concert"
+import { Concert, inputCreateConcertDTO, inputGetAllConcertsDTO, outputGetAllConcertsDTO } from "../model/Concert"
 import { ConcertRepository } from "../model/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
@@ -27,7 +27,7 @@ export class ConcertBusiness {
                 throw new MissingBandId()
             }
             if (!input.weekDay) {
-                throw new MissingBandId()
+                throw new MissingWeekDay()
             }
             if (!input.startTime) {
                 throw new MissingStartTime()
@@ -99,6 +99,33 @@ export class ConcertBusiness {
             const concertId = this.idGenerator.generateId()
             const newConcert = new Concert(concertId, input.weekDay, input.startTime, input.endTime, input.bandId)
             await this.concertDatabase.createConcert(newConcert)
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async getAllConcerts (input: inputGetAllConcertsDTO): Promise<outputGetAllConcertsDTO[]> {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+            if (!input.weekDay) {
+                throw new MissingWeekDay()
+            }
+            if (input.weekDay.toLowerCase() !== "friday" && input.weekDay.toLowerCase() !== "saturday" && input.weekDay.toLowerCase() !== "sunday") {
+                throw new InvalidWeekDay()
+            }
+           
+            await this.authorization.getTokenData(input.token)
+
+            const result = await this.concertDatabase.getAllConcerts(input.weekDay)
+            if (result.length === 0) {
+                throw new NoConcertsRegistered()
+            }
+
+            return result
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
