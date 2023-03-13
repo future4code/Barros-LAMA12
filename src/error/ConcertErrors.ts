@@ -60,3 +60,9 @@ export class DuplicateConcert extends CustomError {
         super (422, "There is a concert already registered in this period of time.")
     }
 }
+
+export class NoConcertsRegistered extends CustomError {
+    constructor () {
+        super (422, "There are no concerts registered on this day yet.")
+    }
+}

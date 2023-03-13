@@ -1,5 +1,5 @@
 import { CustomError } from "../error/CustomError"
-import { Concert } from "../model/Concert"
+import { Concert, outputGetAllConcertsDTO } from "../model/Concert"
 import { ConcertRepository } from "../model/ConcertRepository"
 import { BaseDatabase } from "./BaseDatabase"
 
@@ -15,6 +15,7 @@ export class ConcertDatabase extends BaseDatabase implements ConcertRepository {
         }
     }
 
+    
     async searchConcerts (weekDay: string, column: string, value: string): Promise<any> {
         try {
             const result = await BaseDatabase.connection(this.TABLE_NAME)
@@ -23,6 +24,18 @@ export class ConcertDatabase extends BaseDatabase implements ConcertRepository {
             .andWhere(column, value)
 
             return result[0]
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async getAllConcerts (weekDay: string): Promise<outputGetAllConcertsDTO[]> {
+        try {
+            return await BaseDatabase.connection(this.TABLE_NAME)
+            .join("LAMA_BANDS", "LAMA_CONCERTS.band_id", "=", "LAMA_BANDS.id")
+            .select("LAMA_CONCERTS.week_day", "LAMA_CONCERTS.start_time", "LAMA_CONCERTS.end_time", "LAMA_BANDS.name", "LAMA_BANDS.music_genre")
+            .where("week_day", weekDay).orderBy("start_time")
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }

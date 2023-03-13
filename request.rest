@@ -49,3 +49,9 @@ Content-Type: application/json
     "endTime": "10:00:00",
     "bandId": "6de48ecb-3583-4a73-bab1-3161a5ca4884"
 }
+
+
+### GET ALL CONCERTS
+GET http://localhost:3003/concerts?weekDay=friday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcwOTMxMiwiZXhwIjoxNjc4NzEyOTEyfQ.QdhHho7LJoFiUdE-ngXo6BX0yTMw_teOZxrQhwJBZnI
+Content-Type: application/json

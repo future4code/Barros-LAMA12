@@ -21,3 +21,16 @@ export interface inputCreateConcertDTO {
     bandId: string,
     token: string
 }
+
+export interface inputGetAllConcertsDTO {
+    weekDay: string,
+    token: string
+}
+
+export interface outputGetAllConcertsDTO {
+    week_day: string,
+    start_time: string,
+    end_time: string,
+    name: string,
+    music_genre: string
+}

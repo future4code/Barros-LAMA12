@@ -1,6 +1,6 @@
 import { ConcertBusiness } from "../business/ConcertBusiness"
 import { Request, Response } from "express"
-import { inputCreateConcertDTO } from "../model/Concert"
+import { inputCreateConcertDTO, inputGetAllConcertsDTO } from "../model/Concert"
 
 
 export class ConcertController {
@@ -18,6 +18,22 @@ export class ConcertController {
 
             await this.concertBusiness.createConcert(input)
             res.status(201).send("Concert created successfully!")
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+
+    async getAllConcerts (req: Request, res: Response): Promise<void> {
+        try {
+            const input: inputGetAllConcertsDTO = {
+                weekDay: req.query.weekDay as string,
+                token: req.headers.authorization as string
+            }
+
+            const result = await this.concertBusiness.getAllConcerts(input)
+            res.status(200).send(result)
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)

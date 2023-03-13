@@ -15,3 +15,4 @@ const concertBusiness = new ConcertBusiness(concertDatabase, bandDatabase, new A
 const concertController = new ConcertController(concertBusiness)
 
 concertRouter.post("/create", (req, res) => concertController.createConcert(req, res))
+concertRouter.get("/", (req, res) => concertController.getAllConcerts(req, res))
