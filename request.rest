@@ -82,6 +82,12 @@ Content-Type: application/json
 }
 
 
+### GET ALL TICKETS
+GET http://localhost:3003/tickets?weekDay=friday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODczMzExNCwiZXhwIjoxNjc4NzM2NzE0fQ.82r0DNI1vbAhjci_NwKMhV9fojQ9Nm1MfeTnvKlP1t4
+Content-Type: application/json
+
+
 ### CREATE PHOTO
 POST http://localhost:3003/photos/create
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyODYwMiwiZXhwIjoxNjc4NzMyMjAyfQ.1RA9o7TjMn65hVNczQy_jX69gFgzy6hJ7gmMYH-a7pQ

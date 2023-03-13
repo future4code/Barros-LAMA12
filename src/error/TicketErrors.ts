@@ -53,3 +53,9 @@ export class InvalidUnits extends CustomError {
         super (422, "The number of tickets must be higher than zero.")
     }
 }
+
+export class NoTicketsFound extends CustomError {
+    constructor () {
+        super (404, "No tickets were found for the provided week day.")
+    }
+}

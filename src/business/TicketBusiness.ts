@@ -1,14 +1,14 @@
-import { ConcertIdNotFound, MissingConcertId } from "../error/ConcertErrors"
+import { ConcertIdNotFound, InvalidWeekDay, MissingConcertId, MissingWeekDay } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
-import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTicketsAvailable, MissingUnits, TicketIdNotFound } from "../error/TicketErrors";
+import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTicketsAvailable, MissingUnits, NoTicketsFound, TicketIdNotFound } from "../error/TicketErrors";
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { inputCreateTicketDTO, Ticket } from "../model/Ticket"
+import { inputCreateTicketDTO, inputGetAllTicketsDTO, outputGetAllTicketsDTO, Ticket } from "../model/Ticket"
 import { TicketRepository } from "../model/Repositories/TicketRepository"
 import { USER_ROLES } from "../model/User"
-import { inputPurchaseTicketDTO, Purchase } from "../model/Purchase";
+import { inputPurchaseTicketDTO, Purchase } from "../model/Purchase"
 
 
 export class TicketBusiness {
@@ -95,6 +95,33 @@ export class TicketBusiness {
             const ticketsAvailable = ticketIdExists.tickets_available - input.units
             const ticketsSold = ticketIdExists.tickets_sold + input.units
             await this.ticketDatabase.editTicketUnits(input.ticketId, ticketsAvailable, ticketsSold)
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async getAllTickets (input: inputGetAllTicketsDTO): Promise<outputGetAllTicketsDTO> {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+            if (!input.weekDay) {
+                throw new MissingWeekDay()
+            }
+            if (input.weekDay.toLowerCase() !== "friday" && input.weekDay.toLowerCase() !== "saturday" && input.weekDay.toLowerCase() !== "sunday") {
+                throw new InvalidWeekDay()
+            }
+
+            await this.authorization.getTokenData(input.token)
+
+            const result = await this.ticketDatabase.getAllTickets(input.weekDay)
+            if (result.length === 0) {
+                throw new NoTicketsFound()
+            }
+
+            return result
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)

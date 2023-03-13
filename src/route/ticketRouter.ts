@@ -15,3 +15,4 @@ const ticketController = new TicketController(ticketBusiness)
 
 ticketRouter.post("/create", (req, res) => ticketController.createTicket(req, res))
 ticketRouter.post("/purchase", (req, res) => ticketController.purchaseTicket(req, res))
+ticketRouter.get("/", (req, res) => ticketController.getAllTickets(req, res))
