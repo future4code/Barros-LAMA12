@@ -23,3 +23,21 @@ export interface inputCreateTicketDTO {
     ticketsAvailable: number,
     token: string
 }
+
+export interface inputGetAllTicketsDTO {
+    weekDay: string,
+    token: string
+}
+
+export interface outputGetAllTicketsDTO {
+    id: string,
+    ticket_name: string,
+    price: number,
+    tickets_available: number,
+    tickets_sold: number,
+    week_day: string,
+    start_time: string,
+    end_time: string,
+    band_name: string,
+    music_genre: string
+}

@@ -7,4 +7,5 @@ export interface TicketRepository {
     purchaseTicket (newPurchase: Purchase): Promise<void>
     getTicketById (id: string): Promise<any>
     editTicketUnits (id: string, ticketsAvailable: number, unitsSold: number): Promise<void>
+    getAllTickets (weekDay: string): Promise<any>
 }

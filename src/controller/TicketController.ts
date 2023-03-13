@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { TicketBusiness } from "../business/TicketBusiness"
 import { inputPurchaseTicketDTO } from "../model/Purchase"
-import { inputCreateTicketDTO } from "../model/Ticket"
+import { inputCreateTicketDTO, inputGetAllTicketsDTO } from "../model/Ticket"
 
 
 export class TicketController {
@@ -36,6 +36,22 @@ export class TicketController {
 
             await this.ticketBusiness.purchaseTicket(input)
             res.status(201).send("Purchase created successfully!")
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+
+    async getAllTickets (req: Request, res: Response): Promise<void> {
+        try {
+            const input: inputGetAllTicketsDTO = {
+                weekDay: req.query.weekDay as string,
+                token: req.headers.authorization as string
+            }
+
+            const result = await this.ticketBusiness.getAllTickets(input)
+            res.status(200).send(result)
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
