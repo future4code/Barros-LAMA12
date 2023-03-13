@@ -12,3 +12,4 @@ const photoBusiness = new PhotoBusiness(photoDatabase, new Authenticator(), new 
 const photoController = new PhotoController(photoBusiness)
 
 photoRouter.post("/create", (req, res) => photoController.createPhoto(req, res))
+photoRouter.get("/", (req, res) => photoController.getAllPhotos(req, res))
