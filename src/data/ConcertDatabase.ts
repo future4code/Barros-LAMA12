@@ -1,6 +1,6 @@
 import { CustomError } from "../error/CustomError"
 import { Concert, outputGetAllConcertsDTO } from "../model/Concert"
-import { ConcertRepository } from "../model/ConcertRepository"
+import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { BaseDatabase } from "./BaseDatabase"
 
 

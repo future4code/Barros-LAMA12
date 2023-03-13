@@ -1,6 +1,6 @@
 import { CustomError } from "../error/CustomError"
 import { User } from "../model/User"
-import { UserRepository } from "../model/UserRepository"
+import { UserRepository } from "../model/Repositories/UserRepository"
 import { BaseDatabase } from "./BaseDatabase"
 
 

@@ -4,7 +4,7 @@ import { IAuthenticator } from "../model/IAuthenticator"
 import { IHashManager } from "../model/IHashManager"
 import { IIdGenerator } from "../model/IIdGenerator"
 import { inputSignUpDTO, loginInputDTO, User, USER_ROLES } from "../model/User"
-import { UserRepository } from "../model/UserRepository"
+import { UserRepository } from "../model/Repositories/UserRepository"
 
 
 export class UserBusiness {

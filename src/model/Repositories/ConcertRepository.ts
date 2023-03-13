@@ -1,4 +1,4 @@
-import { Concert, outputGetAllConcertsDTO } from "./Concert"
+import { Concert, outputGetAllConcertsDTO } from "../Concert"
 
 
 export interface ConcertRepository {

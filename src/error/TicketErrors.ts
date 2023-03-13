@@ -1,5 +1,17 @@
 import { CustomError } from "./CustomError"
 
+export class MissingTicketId extends CustomError {
+    constructor () {
+        super (422, "Provide the id of the ticket.")
+    }
+}
+
+export class TicketIdNotFound extends CustomError {
+    constructor () {
+        super (404, "Ticket id not found.")
+    }
+}
+
 export class MissingTicketName extends CustomError {
     constructor () {
         super (422, "Provide the name of the ticket.")
@@ -27,5 +39,17 @@ export class MissingTicketsAvailable extends CustomError {
 export class InvalidTicketsAvailable extends CustomError {
     constructor () {
         super (422, "The number of tickets available for purchase must be higher than zero.")
+    }
+}
+
+export class MissingUnits extends CustomError {
+    constructor () {
+        super (422, "Provide the number of tickets to be purchased.")
+    }
+}
+
+export class InvalidUnits extends CustomError {
+    constructor () {
+        super (422, "The number of tickets must be higher than zero.")
     }
 }
