@@ -40,4 +40,14 @@ export class ConcertDatabase extends BaseDatabase implements ConcertRepository {
             throw new CustomError(error.statusCode, error.message)
         }
     }
+
+
+    async getConcertById (id: string): Promise<any> {
+        try {
+            const result = await BaseDatabase.connection(this.TABLE_NAME).select().where("id", id)
+            return result[0]
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
 }

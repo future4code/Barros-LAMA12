@@ -15,3 +15,11 @@ export class Ticket {
         this.concert_id = concert_id
     }
 }
+
+export interface inputCreateTicketDTO {
+    ticketName: string,
+    price: number,
+    concertId: string,
+    ticketsAvailable: number,
+    token: string
+}

@@ -55,3 +55,16 @@ Content-Type: application/json
 GET http://localhost:3003/concerts?weekDay=friday
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcwOTMxMiwiZXhwIjoxNjc4NzEyOTEyfQ.QdhHho7LJoFiUdE-ngXo6BX0yTMw_teOZxrQhwJBZnI
 Content-Type: application/json
+
+
+### CREATE TICKET
+POST http://localhost:3003/tickets/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyMDk3MCwiZXhwIjoxNjc4NzI0NTcwfQ.fzBcU84ORitUU0M6RlEY40REqWoKsIvVvjBMly8gfiA
+Content-Type: application/json
+
+{
+    "ticketName": "Skank: Tour Brasil",
+    "ticketsAvailable": 25000,
+    "price": 200,
+    "concertId": "aafe5f75-779c-48dd-9377-341e0f2ff76a"
+}
