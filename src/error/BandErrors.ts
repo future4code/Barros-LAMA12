@@ -1,6 +1,12 @@
 import { CustomError } from "./CustomError"
 
 
+export class MissingBandId extends CustomError {
+    constructor () {
+        super (422, "Provide the band id.")
+    }
+}
+
 export class MissingBandName extends CustomError {
     constructor () {
         super (422, "Provide the band name.")

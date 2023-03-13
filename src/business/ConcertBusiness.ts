@@ -1,5 +1,5 @@
-import { BandIdNotFound } from "../error/BandErrors"
-import { DuplicateConcert, InvalidConcertDuration, InvalidConcertTime, InvalidEndTime, InvalidStartTime, InvalidWeekDay, MissingBandId, MissingEndTime, MissingStartTime, MissingWeekDay, NoConcertsRegistered } from "../error/ConcertErrors"
+import { BandIdNotFound, MissingBandId } from "../error/BandErrors"
+import { DuplicateConcert, InvalidConcertDuration, InvalidConcertTime, InvalidEndTime, InvalidStartTime, InvalidWeekDay, MissingEndTime, MissingStartTime, MissingWeekDay, NoConcertsRegistered } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { BandRepository } from "../model/BandRepository"
