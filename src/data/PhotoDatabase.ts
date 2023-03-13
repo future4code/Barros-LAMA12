@@ -24,4 +24,23 @@ export class PhotoDatabase extends BaseDatabase implements PhotoRepository {
             throw new CustomError(error.statusCode, error.message)
         }
     }
+
+
+    async getPhotoById (id: string): Promise<any> {
+        try {
+            const result = await BaseDatabase.connection(this.TABLE_NAME).select().where("id", id)
+            return result[0]
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async deletePhoto (id: string): Promise<void> {
+        try {
+            await BaseDatabase.connection(this.TABLE_NAME).delete().where("id", id)
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
 }

@@ -22,3 +22,8 @@ export interface inputGetAllPhotosDTO {
     weekDay: string,
     token: string
 }
+
+export interface inputDeletePhotoDTO {
+    photoId: string,
+    token: string
+}

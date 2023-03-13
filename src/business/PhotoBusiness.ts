@@ -1,10 +1,10 @@
 import { InvalidWeekDay, MissingWeekDay } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
-import { MissingPhotoUrl, PhotosNotFound } from "../error/PhotoErrors"
+import { MissingPhotoId, MissingPhotoUrl, PhotoIdNotFound, PhotosNotFound } from "../error/PhotoErrors"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { inputCreatePhotoDTO, inputGetAllPhotosDTO, Photo } from "../model/Photo"
+import { inputCreatePhotoDTO, inputDeletePhotoDTO, inputGetAllPhotosDTO, Photo } from "../model/Photo"
 import { PhotoRepository } from "../model/Repositories/PhotoRepository"
 import { USER_ROLES } from "../model/User"
 
@@ -65,6 +65,33 @@ export class PhotoBusiness {
             }
             
             return result
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async deletePhoto (input: inputDeletePhotoDTO): Promise<void> {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+            if (input.photoId === ":photoId") {
+                throw new MissingPhotoId()
+            }
+
+            const {id, role} = await this.authorization.getTokenData(input.token)
+            if (role.toUpperCase() !== USER_ROLES.ADMIN) {
+                throw new Unauthorized()
+            }
+
+            const photoIdExists = await this.photoDatabase.getPhotoById(input.photoId)
+            if (!photoIdExists) {
+                throw new PhotoIdNotFound()
+            }
+
+            await this. photoDatabase.deletePhoto(input.photoId)
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)

@@ -13,3 +13,4 @@ const photoController = new PhotoController(photoBusiness)
 
 photoRouter.post("/create", (req, res) => photoController.createPhoto(req, res))
 photoRouter.get("/", (req, res) => photoController.getAllPhotos(req, res))
+photoRouter.delete("/:photoId", (req, res) => photoController.deletePhoto(req, res))
