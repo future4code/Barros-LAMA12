@@ -1,6 +1,6 @@
 import { ConcertIdNotFound, InvalidWeekDay, MissingConcertId, MissingWeekDay } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
-import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTicketsAvailable, MissingUnits, NoTicketsFound, TicketIdNotFound } from "../error/TicketErrors";
+import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTicketsAvailable, MissingUnits, NoPurchasesFound, NoTicketsFound, TicketIdNotFound } from "../error/TicketErrors";
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
@@ -8,7 +8,7 @@ import { IIdGenerator } from "../model/IIdGenerator"
 import { inputCreateTicketDTO, inputGetAllTicketsDTO, outputGetAllTicketsDTO, Ticket } from "../model/Ticket"
 import { TicketRepository } from "../model/Repositories/TicketRepository"
 import { USER_ROLES } from "../model/User"
-import { inputPurchaseTicketDTO, Purchase } from "../model/Purchase"
+import { inputPurchaseTicketDTO, outputGetAllPurchasesDTO, Purchase } from "../model/Purchase"
 
 
 export class TicketBusiness {
@@ -119,6 +119,28 @@ export class TicketBusiness {
             const result = await this.ticketDatabase.getAllTickets(input.weekDay)
             if (result.length === 0) {
                 throw new NoTicketsFound()
+            }
+
+            return result
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+
+    async getAllPurchasesByUserId (token: string): Promise<outputGetAllPurchasesDTO[]> {
+        try {
+            if (!token) {
+                throw new MissingToken()
+            }
+            
+            const {id, role} = await this.authorization.getTokenData(token)
+
+            const result = await this.ticketDatabase.getAllPurchasesByUserId(id)
+            if (result.length === 0) {
+                throw new NoPurchasesFound()
             }
 
             return result

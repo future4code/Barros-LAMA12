@@ -59,3 +59,9 @@ export class NoTicketsFound extends CustomError {
         super (404, "No tickets were found for the provided week day.")
     }
 }
+
+export class NoPurchasesFound extends CustomError {
+    constructor () {
+        super (404, "No purchases were found for the provided user id.")
+    }
+}
