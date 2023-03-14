@@ -36,7 +36,7 @@ export class TicketDatabase extends BaseDatabase implements TicketRepository {
     }
 
 
-    async editTicketInfo (id: string, newInfo: any): Promise<void> {
+    async updateTicketInfo (id: string, newInfo: any): Promise<void> {
         try {
             await BaseDatabase.connection(this.TABLE_NAME).update(newInfo).where("id", id)
         } catch (error: any) {

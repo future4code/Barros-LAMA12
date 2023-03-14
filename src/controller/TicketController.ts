@@ -72,7 +72,7 @@ export class TicketController {
     }
 
 
-    async editTicketPrice (req: Request, res: Response): Promise<void> {
+    async updateTicketPrice (req: Request, res: Response): Promise<void> {
         try {
             const input: inputEditTicketPriceDTO = {
                 ticketId: req.params.ticketId,
@@ -80,8 +80,8 @@ export class TicketController {
                 token: req.headers.authorization as string
             }
 
-            const result = await this.ticketBusiness.editTicketPrice(input)
-            res.status(201).send("Ticket info updated successfully!")
+            await this.ticketBusiness.updateTicketPrice(input)
+            res.status(201).send("Ticket price updated successfully!")
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)

@@ -17,4 +17,4 @@ ticketRouter.post("/create", (req, res) => ticketController.createTicket(req, re
 ticketRouter.post("/purchase", (req, res) => ticketController.purchaseTicket(req, res))
 ticketRouter.get("/purchases", (req, res) => ticketController.getAllPurchasesByUserId(req, res))
 ticketRouter.get("/", (req, res) => ticketController.getAllTickets(req, res))
-ticketRouter.patch("/edit/:ticketId", (req, res) => ticketController.editTicketPrice(req, res))
+ticketRouter.patch("/edit/:ticketId", (req, res) => ticketController.updateTicketPrice(req, res))

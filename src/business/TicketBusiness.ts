@@ -95,7 +95,7 @@ export class TicketBusiness {
             const ticketsAvailable = ticketIdExists.tickets_available - input.units
             const ticketsSold = ticketIdExists.tickets_sold + input.units
 
-            await this.ticketDatabase.editTicketInfo(input.ticketId, {tickets_available: ticketsAvailable, tickets_sold: ticketsSold})
+            await this.ticketDatabase.updateTicketInfo(input.ticketId, {tickets_available: ticketsAvailable, tickets_sold: ticketsSold})
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
@@ -152,7 +152,7 @@ export class TicketBusiness {
     }
 
 
-    async editTicketPrice (input: inputEditTicketPriceDTO): Promise<void> {
+    async updateTicketPrice (input: inputEditTicketPriceDTO): Promise<void> {
         try {
             if (!input.token) {
                 throw new MissingToken()
@@ -177,7 +177,7 @@ export class TicketBusiness {
                 throw new TicketIdNotFound()
             }
 
-            await this.ticketDatabase.editTicketInfo(input.ticketId, {price: input.price})
+            await this.ticketDatabase.updateTicketInfo(input.ticketId, {price: input.price})
          
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
