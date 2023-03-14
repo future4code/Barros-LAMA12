@@ -1,4 +1,4 @@
-import { Concert, outputGetAllConcertsDTO } from "../Concert"
+import { Concert, outputGetAllConcertsDTO, updateConcertDatabaseDTO } from "../Concert"
 
 
 export interface ConcertRepository {
@@ -6,4 +6,5 @@ export interface ConcertRepository {
     searchConcerts (weekDay: string, column: string, value: string): Promise<any>
     getAllConcerts (weekDay: string): Promise<outputGetAllConcertsDTO[]>
     getConcertById (id: string): Promise<any>
+    updateConcert (newInfo: updateConcertDatabaseDTO): Promise<void>
 }

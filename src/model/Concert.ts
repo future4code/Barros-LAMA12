@@ -34,3 +34,18 @@ export interface outputGetAllConcertsDTO {
     name: string,
     music_genre: string
 }
+
+export interface inputUpdateConcertDTO {
+    id: string,
+    weekDay: string,
+    startTime: string,
+    endTime: string,
+    token: string
+}
+
+export interface updateConcertDatabaseDTO {
+    id: string,
+    weekDay: string,
+    startTime: string,
+    endTime: string
+}
