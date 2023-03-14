@@ -8,6 +8,7 @@ import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
 import { USER_ROLES } from "../model/User"
+import { CheckConcertTime } from "../utils/CheckConcertTime"
 
 
 export class ConcertBusiness {
@@ -49,52 +50,10 @@ export class ConcertBusiness {
                 throw new BandIdNotFound()
             }
 
-            const startTimeArray = input.startTime.split(":")
-            if (startTimeArray.length < 3) {
-                throw new InvalidStartTime()
-            }
-            if (Number(startTimeArray[0]) < 8 || Number(startTimeArray[0]) > 22) {
-                throw new InvalidStartTime()
-            }
-            if (startTimeArray[1] !== "00" || startTimeArray[2] !== "00") {
-                throw new InvalidStartTime()
-            }
-
-            const endTimeArray = input.endTime.split(":")
-            if (endTimeArray.length < 3) {
-                throw new InvalidEndTime()
-            }
-            if (Number(endTimeArray[0]) < 9 || Number(startTimeArray[0]) > 23) {
-                throw new InvalidEndTime()
-            }
-            if (endTimeArray[1] !== "00" || endTimeArray[2] !== "00") {
-                throw new InvalidEndTime()
-            }
-
-            if (Number(endTimeArray[0]) < Number(startTimeArray[0])) {
-                throw new InvalidConcertTime()
-            }
-
-            if (Number(endTimeArray[0]) === Number(startTimeArray[0])) {
-                throw new InvalidConcertDuration()
-            }
-
-            let invalidStartTime = await this.concertDatabase.searchConcerts(input.weekDay, "start_time", input.startTime)
-            if (invalidStartTime) {
-                throw new DuplicateConcert()
-            }
-
-            let editEndTime = Number(startTimeArray[0]) + 1
-            invalidStartTime = await this.concertDatabase.searchConcerts(input.weekDay, "end_time", `${editEndTime}:00:00`)
-            if (invalidStartTime) {
-                throw new DuplicateConcert()
-            }
-
-            editEndTime = Number(endTimeArray[0]) + 1
-            invalidStartTime = await this.concertDatabase.searchConcerts(input.weekDay, "end_time", `${editEndTime}:00:00`)
-            if (invalidStartTime) {
-                throw new DuplicateConcert()
-            }
+            await new CheckConcertTime(this.concertDatabase).startTimeFormat(input.startTime)
+            await new CheckConcertTime(this.concertDatabase).endTimeFormat(input.endTime)
+            await new CheckConcertTime(this.concertDatabase).concertDuration(input.startTime, input.endTime)
+            await new CheckConcertTime(this.concertDatabase).duplicateConcert(input.weekDay, input.startTime, input.endTime, "id")
 
             const concertId = this.idGenerator.generateId()
             const newConcert = new Concert(concertId, input.weekDay, input.startTime, input.endTime, input.bandId)
@@ -165,53 +124,11 @@ export class ConcertBusiness {
                 input.endTime = getConcert.end_time
             }
 
-            const startTimeArray = input.startTime.split(":")
-            if (startTimeArray.length < 3) {
-                throw new InvalidStartTime()
-            }
-            if (Number(startTimeArray[0]) < 8 || Number(startTimeArray[0]) > 22) {
-                throw new InvalidStartTime()
-            }
-            if (startTimeArray[1] !== "00" || startTimeArray[2] !== "00") {
-                throw new InvalidStartTime()
-            }
-
-            const endTimeArray = input.endTime.split(":")
-            if (endTimeArray.length < 3) {
-                throw new InvalidEndTime()
-            }
-            if (Number(endTimeArray[0]) < 9 || Number(startTimeArray[0]) > 23) {
-                throw new InvalidEndTime()
-            }
-            if (endTimeArray[1] !== "00" || endTimeArray[2] !== "00") {
-                throw new InvalidEndTime()
-            }
-
-            if (Number(endTimeArray[0]) < Number(startTimeArray[0])) {
-                throw new InvalidConcertTime()
-            }
-
-            if (Number(endTimeArray[0]) === Number(startTimeArray[0])) {
-                throw new InvalidConcertDuration()
-            }
-
-            let invalidStartTime = await this.concertDatabase.searchConcerts(input.weekDay, "start_time", input.startTime)
-            if (invalidStartTime && invalidStartTime.id !== input.id) {
-                throw new DuplicateConcert()
-            }
-
-            let editEndTime = Number(startTimeArray[0]) + 1
-            invalidStartTime = await this.concertDatabase.searchConcerts(input.weekDay, "end_time", `${editEndTime}:00:00`)
-            if (invalidStartTime && invalidStartTime.id !== input.id) {
-                throw new DuplicateConcert()
-            }
-
-            editEndTime = Number(endTimeArray[0]) + 1
-            invalidStartTime = await this.concertDatabase.searchConcerts(input.weekDay, "end_time", `${editEndTime}:00:00`)
-            if (invalidStartTime && invalidStartTime.id !== input.id) {
-                throw new DuplicateConcert()
-            }
-
+            await new CheckConcertTime(this.concertDatabase).startTimeFormat(input.startTime)
+            await new CheckConcertTime(this.concertDatabase).endTimeFormat(input.endTime)
+            await new CheckConcertTime(this.concertDatabase).concertDuration(input.startTime, input.endTime)
+            await new CheckConcertTime(this.concertDatabase).duplicateConcert(input.weekDay, input.startTime, input.endTime, input.id)
+            
             const newInfo: updateConcertDatabaseDTO = {
                 id: input.id,
                 weekDay: input.weekDay,
