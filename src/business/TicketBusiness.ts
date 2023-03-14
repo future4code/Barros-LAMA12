@@ -5,7 +5,7 @@ import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { inputCreateTicketDTO, inputGetAllTicketsDTO, outputGetAllTicketsDTO, Ticket } from "../model/Ticket"
+import { inputCreateTicketDTO, inputEditTicketPriceDTO, inputGetAllTicketsDTO, outputGetAllTicketsDTO, Ticket } from "../model/Ticket"
 import { TicketRepository } from "../model/Repositories/TicketRepository"
 import { USER_ROLES } from "../model/User"
 import { inputPurchaseTicketDTO, outputGetAllPurchasesDTO, Purchase } from "../model/Purchase"
@@ -94,7 +94,8 @@ export class TicketBusiness {
 
             const ticketsAvailable = ticketIdExists.tickets_available - input.units
             const ticketsSold = ticketIdExists.tickets_sold + input.units
-            await this.ticketDatabase.editTicketUnits(input.ticketId, ticketsAvailable, ticketsSold)
+
+            await this.ticketDatabase.editTicketInfo(input.ticketId, {tickets_available: ticketsAvailable, tickets_sold: ticketsSold})
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
@@ -145,6 +146,39 @@ export class TicketBusiness {
 
             return result
 
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async editTicketPrice (input: inputEditTicketPriceDTO): Promise<void> {
+        try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
+            if (!input.ticketId) {
+                throw new MissingTicketId()
+            }
+            if (!input.price) {
+                throw new MissingTicketPrice()
+            }
+            if (input.price < 1) {
+                throw new InvalidTicketPrice()
+            }
+            
+            const {id, role} = await this.authorization.getTokenData(input.token)
+            if (role.toUpperCase() !== USER_ROLES.ADMIN) {
+                throw new Unauthorized()
+            }
+
+            const idExists = await this.ticketDatabase.getTicketById(input.ticketId)
+            if (!idExists) {
+                throw new TicketIdNotFound()
+            }
+
+            await this.ticketDatabase.editTicketInfo(input.ticketId, {price: input.price})
+         
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }

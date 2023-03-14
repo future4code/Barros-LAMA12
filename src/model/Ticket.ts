@@ -41,3 +41,9 @@ export interface outputGetAllTicketsDTO {
     band_name: string,
     music_genre: string
 }
+
+export interface inputEditTicketPriceDTO {
+    ticketId: string,
+    price: number,
+    token: string
+}

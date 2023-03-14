@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { TicketBusiness } from "../business/TicketBusiness"
 import { inputPurchaseTicketDTO } from "../model/Purchase"
-import { inputCreateTicketDTO, inputGetAllTicketsDTO } from "../model/Ticket"
+import { inputCreateTicketDTO, inputEditTicketPriceDTO, inputGetAllTicketsDTO } from "../model/Ticket"
 
 
 export class TicketController {
@@ -65,6 +65,23 @@ export class TicketController {
 
             const result = await this.ticketBusiness.getAllPurchasesByUserId(token)
             res.status(200).send(result)
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+
+    async editTicketPrice (req: Request, res: Response): Promise<void> {
+        try {
+            const input: inputEditTicketPriceDTO = {
+                ticketId: req.params.ticketId,
+                price: req.body.price,
+                token: req.headers.authorization as string
+            }
+
+            const result = await this.ticketBusiness.editTicketPrice(input)
+            res.status(201).send("Ticket info updated successfully!")
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)

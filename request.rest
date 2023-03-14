@@ -15,7 +15,7 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "fran_hahn@hotmail.com",
+    "email": "jp.soares@gmail.com",
     "password": "12345678"
 }
 
@@ -78,6 +78,16 @@ Content-Type: application/json
     "ticketsAvailable": 25000,
     "price": 200,
     "concertId": "aafe5f75-779c-48dd-9377-341e0f2ff76a"
+}
+
+
+### EDIT TICKET PRICE
+PATCH http://localhost:3003/tickets/edit/72b86867-777d-414d-81be-ca76e0daf7ff
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgxNjk0MiwiZXhwIjoxNjc4ODIwNTQyfQ.UJ7HBP5s6KE_fstck_O_WELQRsTHHbMXIIoZNlYZ-fM
+Content-Type: application/json
+
+{
+    "price": 220
 }
 
 
