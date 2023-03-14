@@ -19,3 +19,10 @@ export interface inputPurchaseTicketDTO {
     units: number,
     token: string
 }
+
+export interface outputGetAllPurchasesDTO {
+    ticket_name: string,
+    price: number,
+    units: number,
+    total_price: number
+}

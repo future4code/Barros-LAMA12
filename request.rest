@@ -15,7 +15,7 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "jp.soares@gmail.com",
+    "email": "fran_hahn@hotmail.com",
     "password": "12345678"
 }
 
@@ -91,6 +91,12 @@ Content-Type: application/json
     "units": 2,
     "concertId": "aafe5f75-779c-48dd-9377-341e0f2ff76a"
 }
+
+
+### GET ALL PURCHASES BY USER ID
+GET http://localhost:3003/tickets/purchases
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5MmU5OGU4LTMzNDItNGYzMC05ZDIwLTc4NTE1ZWM4YzJkNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzg3OTg0MDksImV4cCI6MTY3ODgwMjAwOX0.sA7-V6cFUmWhhrvbtsHbcDLnXjIvbR-6CUFdi2jgGPk
+Content-Type: application/json
 
 
 ### GET ALL TICKETS

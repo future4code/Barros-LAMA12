@@ -8,4 +8,5 @@ export interface TicketRepository {
     getTicketById (id: string): Promise<any>
     editTicketUnits (id: string, ticketsAvailable: number, unitsSold: number): Promise<void>
     getAllTickets (weekDay: string): Promise<any>
+    getAllPurchasesByUserId (id: string): Promise<any>
 }

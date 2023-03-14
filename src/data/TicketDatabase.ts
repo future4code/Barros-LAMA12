@@ -58,4 +58,16 @@ export class TicketDatabase extends BaseDatabase implements TicketRepository {
             throw new CustomError(error.statusCode, error.message)
         }
     }
+
+
+    async getAllPurchasesByUserId (id: string): Promise<any> {
+        try {
+            return await BaseDatabase.connection("LAMA_PURCHASES")
+            .join(this.TABLE_NAME, "LAMA_PURCHASES.ticket_id", "=", "LAMA_TICKETS.id")
+            .select("LAMA_TICKETS.ticket_name", "LAMA_TICKETS.price", "LAMA_PURCHASES.units", "LAMA_PURCHASES.total_price")
+            .where("LAMA_PURCHASES.user_id", id)
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
 }
