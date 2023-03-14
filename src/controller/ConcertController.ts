@@ -1,6 +1,6 @@
 import { ConcertBusiness } from "../business/ConcertBusiness"
 import { Request, Response } from "express"
-import { inputCreateConcertDTO, inputGetAllConcertsDTO } from "../model/Concert"
+import { inputCreateConcertDTO, inputGetAllConcertsDTO, inputUpdateConcertDTO } from "../model/Concert"
 
 
 export class ConcertController {
@@ -34,6 +34,25 @@ export class ConcertController {
 
             const result = await this.concertBusiness.getAllConcerts(input)
             res.status(200).send(result)
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+
+    async updateConcert (req: Request, res: Response): Promise<void> {
+        try {
+            const input: inputUpdateConcertDTO = {
+                id: req.params.id,
+                weekDay: req.body.weekDay,
+                startTime: req.body.startTime,
+                endTime: req.body.endTime,
+                token: req.headers.authorization as string
+            }
+
+            await this.concertBusiness.updateConcert(input)
+            res.status(201).send("Concert information updated successfully!")
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)

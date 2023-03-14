@@ -1,5 +1,5 @@
 import { CustomError } from "../error/CustomError"
-import { Concert, outputGetAllConcertsDTO } from "../model/Concert"
+import { Concert, outputGetAllConcertsDTO, updateConcertDatabaseDTO } from "../model/Concert"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { BaseDatabase } from "./BaseDatabase"
 
@@ -46,6 +46,17 @@ export class ConcertDatabase extends BaseDatabase implements ConcertRepository {
         try {
             const result = await BaseDatabase.connection(this.TABLE_NAME).select().where("id", id)
             return result[0]
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async updateConcert (newInfo: updateConcertDatabaseDTO): Promise<void> {
+        try {
+            await BaseDatabase.connection(this.TABLE_NAME)
+            .update({week_day: newInfo.weekDay, start_time: newInfo.startTime, end_time: newInfo.endTime})
+            .where("id", newInfo.id)
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }
