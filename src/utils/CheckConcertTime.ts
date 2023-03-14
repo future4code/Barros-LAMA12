@@ -1,12 +1,13 @@
 import { DuplicateConcert, InvalidConcertDuration, InvalidConcertTime, InvalidEndTime, InvalidStartTime } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
+import { ICheckConcertTime } from "../model/ICheckConcertTime"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 
 
-export class CheckConcertTime {
+export class CheckConcertTime implements ICheckConcertTime {
     constructor (private concertDatabase: ConcertRepository) {}
 
-    public startTimeFormat (startTime: string) {
+    public startTimeFormat (startTime: string): void {
         try {
             const startTimeArray = startTime.split(":")
         
@@ -25,7 +26,7 @@ export class CheckConcertTime {
     }
 
 
-    public endTimeFormat (endTime: string) {
+    public endTimeFormat (endTime: string): void {
         try {
             const endTimeArray = endTime.split(":")
 
@@ -44,7 +45,7 @@ export class CheckConcertTime {
     }
 
 
-    public concertDuration (startTime: string, endTime: string) {
+    public concertDuration (startTime: string, endTime: string): void {
         try {
             const startTimeArray = startTime.split(":")
             const endTimeArray = endTime.split(":")
@@ -61,7 +62,7 @@ export class CheckConcertTime {
     }
 
 
-    public async duplicateConcert (weekDay: string, startTime: string, endTime: string, id: string) {
+    public async duplicateConcert (weekDay: string, startTime: string, endTime: string, id: string): Promise<void> {
         try {
             const startTimeArray = startTime.split(":")
             const endTimeArray = endTime.split(":")

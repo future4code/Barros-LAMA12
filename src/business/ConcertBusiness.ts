@@ -9,6 +9,7 @@ import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
 import { USER_ROLES } from "../model/User"
 import { CheckConcertTime } from "../utils/CheckConcertTime"
+import { ICheckConcertTime } from "../model/ICheckConcertTime"
 
 
 export class ConcertBusiness {
@@ -16,7 +17,8 @@ export class ConcertBusiness {
         private concertDatabase: ConcertRepository,
         private bandDatabase: BandRepository,
         private authorization: IAuthenticator,
-        private idGenerator: IIdGenerator
+        private idGenerator: IIdGenerator,
+        private checkConcertTime: ICheckConcertTime
     ) {}
 
     async createConcert (input: inputCreateConcertDTO): Promise<void> {
@@ -50,10 +52,10 @@ export class ConcertBusiness {
                 throw new BandIdNotFound()
             }
 
-            await new CheckConcertTime(this.concertDatabase).startTimeFormat(input.startTime)
-            await new CheckConcertTime(this.concertDatabase).endTimeFormat(input.endTime)
-            await new CheckConcertTime(this.concertDatabase).concertDuration(input.startTime, input.endTime)
-            await new CheckConcertTime(this.concertDatabase).duplicateConcert(input.weekDay, input.startTime, input.endTime, "id")
+            await this.checkConcertTime.startTimeFormat(input.startTime)
+            await this.checkConcertTime.endTimeFormat(input.endTime)
+            await this.checkConcertTime.concertDuration(input.startTime, input.endTime)
+            await this.checkConcertTime.duplicateConcert(input.weekDay, input.startTime, input.endTime, "id")
 
             const concertId = this.idGenerator.generateId()
             const newConcert = new Concert(concertId, input.weekDay, input.startTime, input.endTime, input.bandId)
@@ -124,10 +126,10 @@ export class ConcertBusiness {
                 input.endTime = getConcert.end_time
             }
 
-            await new CheckConcertTime(this.concertDatabase).startTimeFormat(input.startTime)
-            await new CheckConcertTime(this.concertDatabase).endTimeFormat(input.endTime)
-            await new CheckConcertTime(this.concertDatabase).concertDuration(input.startTime, input.endTime)
-            await new CheckConcertTime(this.concertDatabase).duplicateConcert(input.weekDay, input.startTime, input.endTime, input.id)
+            await this.checkConcertTime.startTimeFormat(input.startTime)
+            await this.checkConcertTime.endTimeFormat(input.endTime)
+            await this.checkConcertTime.concertDuration(input.startTime, input.endTime)
+            await this.checkConcertTime.duplicateConcert(input.weekDay, input.startTime, input.endTime, input.id)
             
             const newInfo: updateConcertDatabaseDTO = {
                 id: input.id,
