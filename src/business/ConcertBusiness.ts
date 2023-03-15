@@ -1,5 +1,5 @@
 import { BandIdNotFound, MissingBandId } from "../error/BandErrors"
-import { ConcertIdNotFound, DuplicateConcert, InvalidConcertDuration, InvalidConcertTime, InvalidEndTime, InvalidStartTime, InvalidWeekDay, MissingConcertId, MissingEndTime, MissingStartTime, MissingWeekDay, NoConcertsRegistered } from "../error/ConcertErrors"
+import { ConcertIdNotFound, InvalidWeekDay, MissingConcertId, MissingEndTime, MissingStartTime, MissingWeekDay, NoConcertsRegistered } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { BandRepository } from "../model/Repositories/BandRepository"
@@ -8,7 +8,6 @@ import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
 import { USER_ROLES } from "../model/User"
-import { CheckConcertTime } from "../utils/CheckConcertTime"
 import { ICheckConcertTime } from "../model/ICheckConcertTime"
 
 
