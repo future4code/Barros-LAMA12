@@ -28,6 +28,7 @@ export interface inputGetAllConcertsDTO {
 }
 
 export interface outputGetAllConcertsDTO {
+    id: string,
     week_day: string,
     start_time: string,
     end_time: string,
