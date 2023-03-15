@@ -15,7 +15,7 @@ export class ConcertDatabase extends BaseDatabase implements ConcertRepository {
         }
     }
 
-    
+
     async searchConcerts (weekDay: string, column: string, value: string): Promise<any> {
         try {
             const result = await BaseDatabase.connection(this.TABLE_NAME)

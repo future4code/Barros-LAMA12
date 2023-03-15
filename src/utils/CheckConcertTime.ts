@@ -56,6 +56,9 @@ export class CheckConcertTime implements ICheckConcertTime {
             if (Number(endTimeArray[0]) === Number(startTimeArray[0])) {
                 throw new InvalidConcertDuration()
             }
+            if (Number(endTimeArray[0]) - Number(startTimeArray[0]) > 2) {
+                throw new InvalidConcertDuration()
+            }
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }

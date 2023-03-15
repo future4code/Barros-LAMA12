@@ -57,13 +57,13 @@ export class InvalidConcertTime extends CustomError {
 
 export class InvalidConcertDuration extends CustomError {
     constructor () {
-        super (422, "The duration of the concert cannot be less than 1 hours or higher than 2 hours.")
+        super (422, "The duration of the concert cannot be less than 1 hour or higher than 2 hours.")
     }
 }
 
 export class DuplicateConcert extends CustomError {
     constructor () {
-        super (422, "There is a concert already registered in this period of time.")
+        super (409, "There is a concert already registered in this period of time.")
     }
 }
 
