@@ -6,8 +6,18 @@ import { concerts } from "./concertsMock"
 export class ConcertDatabaseMock implements ConcertRepository {
     async createConcert (newConcert: Concert): Promise<void> {}
 
+    async searchConcerts (weekDay: string, column: string, value: string): Promise<any> {
+        if (column === "start_time") {
+            const result = concerts.filter(item => item.week_day === weekDay && item.start_time === value)
+            return result[0]
+        } else if (column === "end_time") {
+            const result = concerts.filter(item => item.week_day === weekDay && item.end_time === value)
+            return result[0]
+        }
+    }
+
     async getAllConcerts (weekDay: string): Promise<outputGetAllConcertsDTO[]> {
-        return concerts
+        return concerts.filter(item => item.week_day === weekDay)
     }
 
 

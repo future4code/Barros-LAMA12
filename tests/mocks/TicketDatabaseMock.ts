@@ -1,6 +1,7 @@
 import { Purchase } from "../../src/model/Purchase"
 import { TicketRepository } from "../../src/model/Repositories/TicketRepository"
 import { Ticket } from "../../src/model/Ticket"
+import { purchases } from "./purchases"
 import { tickets } from "./ticketsMock"
 
 
@@ -16,10 +17,10 @@ export class TicketDatabaseMock implements TicketRepository {
     async updateTicketInfo (id: string, newInfo: any): Promise<void> {}
 
     async getAllTickets (weekDay: string): Promise<any> {
-        return tickets
+        return tickets.filter(item => item.week_day === weekDay)
     }
 
     async getAllPurchasesByUserId (id: string): Promise<any> {
-        return 
+        return purchases.filter(item => item.user_id === id)
     }
 }

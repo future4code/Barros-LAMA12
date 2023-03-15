@@ -5,6 +5,7 @@ export const tickets = [
         price: 200,
         tickets_available: 20000,
         tickets_sold: 0,
+        week_day: "friday",
         concert_id: "concertId2"
     },
     {
@@ -13,6 +14,7 @@ export const tickets = [
         price: 150,
         tickets_available: 20000,
         tickets_sold: 0,
+        week_day: "friday",
         concert_id: "concertId1"
     },
     {
@@ -21,6 +23,7 @@ export const tickets = [
         price: 250,
         tickets_available: 20000,
         tickets_sold: 0,
+        week_day: "saturday",
         concert_id: "concertId3"
     }
 ]

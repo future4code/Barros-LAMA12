@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
     "start": "tsc && node ./build/src/index.js",
-    "migrations": "ts-node-dev ./src/migrations/migrations.ts"
+    "migrations": "ts-node-dev ./src/migrations/migrations.ts",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

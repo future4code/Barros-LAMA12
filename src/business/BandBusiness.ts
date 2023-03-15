@@ -17,6 +17,9 @@ export class BandBusiness {
 
     async createBand (input: inputCreateBandDTO): Promise<void> {
         try {
+            if (!input.token) {
+                throw new MissingToken()
+            }
             if (!input.name) {
                 throw new MissingBandName()
             }
@@ -25,9 +28,6 @@ export class BandBusiness {
             }
             if (!input.responsible) {
                 throw new MissingResponsible()
-            }
-            if (!input.token) {
-                throw new MissingToken()
             }
 
             const duplicateName = await this.bandDatabase.getBandBy("name", input.name)
