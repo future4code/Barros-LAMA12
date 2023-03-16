@@ -133,7 +133,7 @@ describe("Testing the create ticket method", () => {
         }
     })
 
-    test("Should receive a valid input and return a custom error", async () => {
+    test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
             ticketName: "Nome do ticket",
             price: 250,
@@ -203,7 +203,7 @@ describe("Testing the purchase ticket method", () => {
         }
     })
 
-    test("Should receive a valid input and not return a custom error", async () => {
+    test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
             ticketId: "ticketId2",
             units: 2,
@@ -220,13 +220,10 @@ describe("Testing the get all tickets method", () => {
     test("Should not receive the week day and return a custom error", async () => {
         expect.assertions(3)
         
-        const input = {
-            weekDay: "",
-            token: "token"
-        }
+        const weekDay = ""
 
         try {
-            await ticketBusiness.getAllTickets(input)
+            await ticketBusiness.getAllTickets(weekDay)
         } catch (error: any) {
             expect(error).toBeInstanceOf(CustomError)
             expect(error.statusCode).toBe(422)
@@ -237,13 +234,10 @@ describe("Testing the get all tickets method", () => {
     test("Should receive an invalid week day and return a custom error", async () => {
         expect.assertions(3)
         
-        const input = {
-            weekDay: "fridays",
-            token: "token"
-        }
+        const weekDay = "fridays"
 
         try {
-            await ticketBusiness.getAllTickets(input)
+            await ticketBusiness.getAllTickets(weekDay)
         } catch (error: any) {
             expect(error).toBeInstanceOf(CustomError)
             expect(error.statusCode).toBe(422)
@@ -251,47 +245,10 @@ describe("Testing the get all tickets method", () => {
         }
     })
 
-    test("Should receive an invalid token and return a custom error", async () => {
-        expect.assertions(3)
-        
-        const input = {
-            weekDay: "friday",
-            token: "invalidToken"
-        }
+    test("Should receive a valid input and NOT return a custom error", async () => {
+        const weekDay = "friday"
 
-        try {
-            await ticketBusiness.getAllTickets(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(401)
-            expect(error.message).toBe("Unauthorized user.")
-        }
-    })
-
-    test("Should receive a valid input of a week day that has no tickets registered yet and return a custom error", async () => {
-        expect.assertions(3)
-        
-        const input = {
-            weekDay: "sunday",
-            token: "token"
-        }
-
-        try {
-            await ticketBusiness.getAllTickets(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(404)
-            expect(error.message).toBe("No tickets were found for the provided week day.")
-        }
-    })
-
-    test("Should receive a valid input and not return a custom error", async () => {
-        const input = {
-            weekDay: "friday",
-            token: "token"
-        }
-
-        const result = await ticketBusiness.getAllTickets(input)
+        const result = await ticketBusiness.getAllTickets(weekDay)
         expect(result).toEqual([
             {
                 id: "ticketId1",
@@ -345,7 +302,7 @@ describe("Testing the getAllPurchasesByUserId method", () => {
         }
     })
 
-    test("Should receive a valid token and not return a custom error", async () => {
+    test("Should receive a valid token and NOT return a custom error", async () => {
         const token = "token"
         const result = await ticketBusiness.getAllPurchasesByUserId(token)
         expect(result).toEqual([
@@ -423,7 +380,7 @@ describe("Testing the update ticket price method", () => {
         }
     })
 
-    test("Should receive a valid input and not return a custom error", async () => {        
+    test("Should receive a valid input and NOT return a custom error", async () => {        
         const input = {
             ticketId: "ticketId2",
             price: 100,

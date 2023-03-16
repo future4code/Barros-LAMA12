@@ -215,7 +215,7 @@ describe("Testing the create concert method", () => {
         }
     })
 
-    test("Should receive a valid input and not return a custom error", async () => {
+    test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
             weekDay: "sunday",
             startTime: "16:00:00",
@@ -231,50 +231,13 @@ describe("Testing the create concert method", () => {
 
 
 describe("Testing the get all concerts method", () => {
-    test("Should not receive the token and resturn a custom error", async () => {
-        expect.assertions(3)
-        
-        const input ={
-            weekDay: "friday",
-            token: ""
-        }
-
-        try {
-            await concertBusiness.getAllConcerts(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(422)
-            expect(error.message).toBe("Provide the token.")
-        }
-    })
-
-    test("Should receive an invalid token and resturn a custom error", async () => {
-        expect.assertions(3)
-        
-        const input ={
-            weekDay: "friday",
-            token: "invalidToken"
-        }
-
-        try {
-            await concertBusiness.getAllConcerts(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(401)
-            expect(error.message).toBe("Unauthorized user.")
-        }
-    })
-
     test("Should receive an invalid weekday and resturn a custom error", async () => {
         expect.assertions(3)
         
-        const input ={
-            weekDay: "fridays",
-            token: "token"
-        }
+        const weekDay = "fridays"
 
         try {
-            await concertBusiness.getAllConcerts(input)
+            await concertBusiness.getAllConcerts(weekDay)
         } catch (error: any) {
             expect(error).toBeInstanceOf(CustomError)
             expect(error.statusCode).toBe(422)
@@ -282,30 +245,10 @@ describe("Testing the get all concerts method", () => {
         }
     })
 
-    test("Should receive a valid input and return a custom error related to no concerts registered yet", async () => {
-        expect.assertions(3)
-        
-        const input = {
-            weekDay: "sunday",
-            token: "token"
-        }
-
-        try {
-            await concertBusiness.getAllConcerts(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(422)
-            expect(error.message).toBe("There are no concerts registered on this day yet.")
-        }
-    })
-
     test("Should receive a valid input and return the registered concerts", async () => {
-        const input = {
-            weekDay: "friday",
-            token: "token"
-        }
+        const weekDay = "friday"
 
-        const result = await concertBusiness.getAllConcerts(input)
+        const result = await concertBusiness.getAllConcerts(weekDay)
         expect(result).toEqual([{
             id: "concertId1",
             week_day: "friday",
@@ -447,7 +390,7 @@ describe("Testing the update concert method", () => {
         }
     })
 
-    test("Should receive a valid input and not return a custom error", async () => {
+    test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
             id: "concertId2",
             weekDay: "friday",

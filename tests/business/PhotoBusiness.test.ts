@@ -48,7 +48,7 @@ describe("Testing the create photo method", () => {
         }
     })
 
-    test("Should receive a valid input and not return a custom error", async () => {
+    test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
             photoUrl: "www.photo.com.br",
             weekDay: "friday",
@@ -61,51 +61,14 @@ describe("Testing the create photo method", () => {
 })
 
 
-describe("Testing the get all photos method", () => {
-    test("Should not receive the token and return a custom error", async () => {
-        expect.assertions(3)
-
-        const input = {
-            weekDay: "friday",
-            token: ""
-        }
-
-        try {
-            await photoBusiness.getAllPhotos(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(422)
-            expect(error.message).toBe("Provide the token.")
-        }
-    })
-
-    test("Should receive an invalid token and return a custom error", async () => {
-        expect.assertions(3)
-
-        const input = {
-            weekDay: "friday",
-            token: "invalidToken"
-        }
-
-        try {
-            await photoBusiness.getAllPhotos(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(401)
-            expect(error.message).toBe("Unauthorized user.")
-        }
-    })
-    
+describe("Testing the get all photos method", () => {    
     test("Should not receive the week day and return a custom error", async () => {
         expect.assertions(3)
 
-        const input = {
-            weekDay: "",
-            token: "token"
-        }
+        const weekDay = ""
 
         try {
-            await photoBusiness.getAllPhotos(input)
+            await photoBusiness.getAllPhotos(weekDay)
         } catch (error: any) {
             expect(error).toBeInstanceOf(CustomError)
             expect(error.statusCode).toBe(422)
@@ -116,13 +79,10 @@ describe("Testing the get all photos method", () => {
     test("Should receive an invalid week day and return a custom error", async () => {
         expect.assertions(3)
 
-        const input = {
-            weekDay: "thursday",
-            token: "token"
-        }
+        const weekDay = "thursday"
 
         try {
-            await photoBusiness.getAllPhotos(input)
+            await photoBusiness.getAllPhotos(weekDay)
         } catch (error: any) {
             expect(error).toBeInstanceOf(CustomError)
             expect(error.statusCode).toBe(422)
@@ -130,28 +90,10 @@ describe("Testing the get all photos method", () => {
         }
     })
 
-    test("Should receive a valid input of a day with no photo registered yet and return a custom error", async () => {
-        const input = {
-            weekDay: "sunday",
-            token: "token"
-        }
+    test("Should receive a valid input and NOT return a custom error", async () => {
+        const weekDay = "friday"
 
-        try {
-            await photoBusiness.getAllPhotos(input)
-        } catch (error: any) {
-            expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(404)
-            expect(error.message).toBe("No photos were found for the provided week day.")
-        }
-    })
-
-    test("Should receive a valid input and not return a custom error", async () => {
-        const input = {
-            weekDay: "friday",
-            token: "token"
-        }
-
-        const result = await photoBusiness.getAllPhotos(input)
+        const result = await photoBusiness.getAllPhotos(weekDay)
         expect(result).toEqual([
             {
                 id: "photoId1",
@@ -239,7 +181,7 @@ describe("Testing the delete photo method", () => {
         }
     })
 
-    test("Should receive a valid photo id and not return a custom error", async () => {
+    test("Should receive a valid photo id and NOT return a custom error", async () => {
         const input = {
             photoId: "photoId2",
             token: "token"

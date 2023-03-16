@@ -109,8 +109,7 @@ describe("Testing the get band info method", () => {
 
         const input = {
             id: "",
-            name: "",
-            token: "token"
+            name: ""
         }
 
         try {
@@ -127,8 +126,7 @@ describe("Testing the get band info method", () => {
 
         const input = {
             id: "bandId",
-            name: "Nome da banda 1",
-            token: "token"
+            name: "Nome da banda 1"
         }
 
         try {
@@ -145,8 +143,7 @@ describe("Testing the get band info method", () => {
 
         const input = {
             id: "bandId40",
-            name: "",
-            token: "token"
+            name: ""
         }
 
         try {
@@ -163,8 +160,7 @@ describe("Testing the get band info method", () => {
 
         const input = {
             id: "",
-            name: "Banda 40",
-            token: "token"
+            name: "Banda 40"
         }
 
         try {
@@ -176,11 +172,10 @@ describe("Testing the get band info method", () => {
         }
     })
 
-    test("Should receive a valid input and return a custom error", async () => {
+    test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
             id: "",
-            name: "Nome da banda 1",
-            token: "token"
+            name: "Nome da banda 1"
         }
 
         const result = await bandBusiness.getBandInfo(input)
