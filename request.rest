@@ -34,7 +34,6 @@ Content-Type: application/json
 
 ### GET BAND INFO
 GET http://localhost:3003/bands/info?name=skank
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5MmU5OGU4LTMzNDItNGYzMC05ZDIwLTc4NTE1ZWM4YzJkNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzg2MjgxOTQsImV4cCI6MTY3ODYzMTc5NH0.5L7z25cZ5iUVxRzqt1gZzJ-noYvXdTcUeJO43IWvFUU
 Content-Type: application/json
 
 
@@ -63,7 +62,6 @@ Content-Type: application/json
 
 ### GET ALL CONCERTS
 GET http://localhost:3003/concerts?weekDay=friday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcwOTMxMiwiZXhwIjoxNjc4NzEyOTEyfQ.QdhHho7LJoFiUdE-ngXo6BX0yTMw_teOZxrQhwJBZnI
 Content-Type: application/json
 
 
@@ -110,7 +108,6 @@ Content-Type: application/json
 
 ### GET ALL TICKETS
 GET http://localhost:3003/tickets?weekDay=friday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODczMzExNCwiZXhwIjoxNjc4NzM2NzE0fQ.82r0DNI1vbAhjci_NwKMhV9fojQ9Nm1MfeTnvKlP1t4
 Content-Type: application/json
 
 
@@ -126,8 +123,7 @@ Content-Type: application/json
 
 
 ### GET ALL PHOTOS
-GET http://localhost:3003/photos?weekDay=sunday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyODYwMiwiZXhwIjoxNjc4NzMyMjAyfQ.1RA9o7TjMn65hVNczQy_jX69gFgzy6hJ7gmMYH-a7pQ
+GET http://localhost:3003/photos?weekDay=friday
 Content-Type: application/json
 
 
