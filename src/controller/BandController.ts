@@ -29,8 +29,7 @@ export class BandController {
         try {
             const input: inputGetBandInfoDTO = {
                 id: req.query.id as string,
-                name: req.query.name as string,
-                token: req.headers.authorization as string
+                name: req.query.name as string
             }
 
             const result = await this.bandBusiness.getBandInfo(input)

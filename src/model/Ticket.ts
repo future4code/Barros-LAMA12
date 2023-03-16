@@ -24,11 +24,6 @@ export interface inputCreateTicketDTO {
     token: string
 }
 
-export interface inputGetAllTicketsDTO {
-    weekDay: string,
-    token: string
-}
-
 export interface outputGetAllTicketsDTO {
     id: string,
     ticket_name: string,

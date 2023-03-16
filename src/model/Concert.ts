@@ -22,11 +22,6 @@ export interface inputCreateConcertDTO {
     token: string
 }
 
-export interface inputGetAllConcertsDTO {
-    weekDay: string,
-    token: string
-}
-
 export interface outputGetAllConcertsDTO {
     id: string,
     week_day: string,

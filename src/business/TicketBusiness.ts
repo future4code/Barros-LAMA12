@@ -5,7 +5,7 @@ import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { inputCreateTicketDTO, inputEditTicketPriceDTO, inputGetAllTicketsDTO, outputGetAllTicketsDTO, Ticket } from "../model/Ticket"
+import { inputCreateTicketDTO, inputEditTicketPriceDTO, outputGetAllTicketsDTO, Ticket } from "../model/Ticket"
 import { TicketRepository } from "../model/Repositories/TicketRepository"
 import { USER_ROLES } from "../model/User"
 import { inputPurchaseTicketDTO, outputGetAllPurchasesDTO, Purchase } from "../model/Purchase"
@@ -103,21 +103,16 @@ export class TicketBusiness {
     }
 
 
-    async getAllTickets (input: inputGetAllTicketsDTO): Promise<outputGetAllTicketsDTO> {
+    async getAllTickets (weekDay: string): Promise<outputGetAllTicketsDTO> {
         try {
-            if (!input.token) {
-                throw new MissingToken()
-            }
-            if (!input.weekDay) {
+            if (!weekDay) {
                 throw new MissingWeekDay()
             }
-            if (input.weekDay.toLowerCase() !== "friday" && input.weekDay.toLowerCase() !== "saturday" && input.weekDay.toLowerCase() !== "sunday") {
+            if (weekDay.toLowerCase() !== "friday" && weekDay.toLowerCase() !== "saturday" && weekDay.toLowerCase() !== "sunday") {
                 throw new InvalidWeekDay()
             }
 
-            await this.authorization.getTokenData(input.token)
-
-            const result = await this.ticketDatabase.getAllTickets(input.weekDay)
+            const result = await this.ticketDatabase.getAllTickets(weekDay)
             if (result.length === 0) {
                 throw new NoTicketsFound()
             }

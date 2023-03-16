@@ -53,14 +53,9 @@ export class BandBusiness {
 
     async getBandInfo (input: inputGetBandInfoDTO): Promise<Band> {
         try {
-            if (!input.token) {
-                throw new MissingToken()                
-            }
             if (!input.id && !input.name) {
                 throw new MissingNameOrId()
             }
-
-            await this.authorization.getTokenData(input.token)
 
             if (input.id && input.name) {
                 throw new InvalidBandInfo()

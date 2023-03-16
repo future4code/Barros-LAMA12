@@ -4,7 +4,7 @@ import { MissingPhotoId, MissingPhotoUrl, PhotoIdNotFound, PhotosNotFound } from
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { inputCreatePhotoDTO, inputDeletePhotoDTO, inputGetAllPhotosDTO, Photo } from "../model/Photo"
+import { inputCreatePhotoDTO, inputDeletePhotoDTO, Photo } from "../model/Photo"
 import { PhotoRepository } from "../model/Repositories/PhotoRepository"
 import { USER_ROLES } from "../model/User"
 
@@ -46,20 +46,16 @@ export class PhotoBusiness {
     }
 
 
-    async getAllPhotos (input: inputGetAllPhotosDTO): Promise<Photo[]> {
+    async getAllPhotos (weekDay: string): Promise<Photo[]> {
         try {
-            if (!input.token) {
-                throw new MissingToken()
-            }
-            if (!input.weekDay) {
+            if (!weekDay) {
                 throw new MissingWeekDay()
             }
-            if (input.weekDay.toLowerCase() !== "friday" && input.weekDay.toLowerCase() !== "saturday" && input.weekDay.toLowerCase() !== "sunday") {
+            if (weekDay.toLowerCase() !== "friday" && weekDay.toLowerCase() !== "saturday" && weekDay.toLowerCase() !== "sunday") {
                 throw new InvalidWeekDay()
             }
 
-            await this.authorization.getTokenData(input.token)
-            const result = await this.photoDatabase.getAllPhotos(input.weekDay)
+            const result = await this.photoDatabase.getAllPhotos(weekDay)
             if (result.length === 0) {
                 throw new PhotosNotFound()
             }

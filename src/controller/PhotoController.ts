@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { PhotoBusiness } from "../business/PhotoBusiness"
-import { inputCreatePhotoDTO, inputDeletePhotoDTO, inputGetAllPhotosDTO } from "../model/Photo"
+import { inputCreatePhotoDTO, inputDeletePhotoDTO } from "../model/Photo"
 
 
 export class PhotoController {
@@ -25,12 +25,8 @@ export class PhotoController {
     
     async getAllPhotos (req: Request, res: Response): Promise<void> {
         try {
-            const input: inputGetAllPhotosDTO = {
-                weekDay: req.query.weekDay as string,
-                token: req.headers.authorization as string
-            }
-
-            const result = await this.photoBusiness.getAllPhotos(input)
+            const weekDay = req.query.weekDay as string
+            const result = await this.photoBusiness.getAllPhotos(weekDay)
             res.status(200).send(result)
 
         } catch (error: any) {

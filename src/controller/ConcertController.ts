@@ -1,6 +1,6 @@
 import { ConcertBusiness } from "../business/ConcertBusiness"
 import { Request, Response } from "express"
-import { inputCreateConcertDTO, inputGetAllConcertsDTO, inputUpdateConcertDTO } from "../model/Concert"
+import { inputCreateConcertDTO, inputUpdateConcertDTO } from "../model/Concert"
 
 
 export class ConcertController {
@@ -27,12 +27,9 @@ export class ConcertController {
 
     async getAllConcerts (req: Request, res: Response): Promise<void> {
         try {
-            const input: inputGetAllConcertsDTO = {
-                weekDay: req.query.weekDay as string,
-                token: req.headers.authorization as string
-            }
+            const weekDay = req.query.weekDay as string
 
-            const result = await this.concertBusiness.getAllConcerts(input)
+            const result = await this.concertBusiness.getAllConcerts(weekDay)
             res.status(200).send(result)
 
         } catch (error: any) {
