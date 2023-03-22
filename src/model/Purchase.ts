@@ -14,9 +14,13 @@ export class Purchase {
     }
 }
 
-export interface inputPurchaseTicketDTO {
+interface tickets {
     ticketId: string,
-    units: number,
+    units: number
+}
+
+export interface inputPurchaseTicketDTO {
+    tickets: tickets[]
     token: string
 }
 

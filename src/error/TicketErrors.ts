@@ -1,5 +1,11 @@
 import { CustomError } from "./CustomError"
 
+export class MissingTickets extends CustomError {
+    constructor () {
+        super (422, "Provide the list of tickets that will be bought icluding the thicket id and the units of each one of them.")
+    }
+}
+
 export class MissingTicketId extends CustomError {
     constructor () {
         super (422, "Provide the id of the ticket.")
@@ -42,11 +48,7 @@ export class InvalidTicketsAvailable extends CustomError {
     }
 }
 
-export class MissingUnits extends CustomError {
-    constructor () {
-        super (422, "Provide the number of tickets to be purchased.")
-    }
-}
+
 
 export class InvalidUnits extends CustomError {
     constructor () {

@@ -1,6 +1,6 @@
 import { ConcertIdNotFound, InvalidWeekDay, MissingConcertId, MissingWeekDay } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
-import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTicketsAvailable, MissingUnits, NoPurchasesFound, NoTicketsFound, TicketIdNotFound } from "../error/TicketErrors";
+import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTickets, MissingTicketsAvailable, NoPurchasesFound, NoTicketsFound, TicketIdNotFound } from "../error/TicketErrors"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
@@ -69,34 +69,35 @@ export class TicketBusiness {
             if (!input.token) {
                 throw new MissingToken()
             }
-            if (!input.ticketId) {
-                throw new MissingTicketId()
-            }
-            if (!input.units) {
-                throw new MissingUnits()
-            }
-            if (input.units < 1) {
-                throw new InvalidUnits()
-            }
-
+            
             const {id, role} = await this.authorization.getTokenData(input.token)
 
-            const ticketIdExists = await this.ticketDatabase.getTicketById(input.ticketId)
-            if (!ticketIdExists) {
-                throw new TicketIdNotFound()
+            if (!input.tickets) {
+                throw new MissingTickets()
             }
-            
-            const purchaseId = this.idGenerator.generateId()
-            const totalPrice = ticketIdExists.price * input.units
-            const newPurchase = new Purchase(purchaseId, id, input.ticketId, input.units, totalPrice)
 
-            await this.ticketDatabase.purchaseTicket(newPurchase)
+            for (let i = 0; i < input.tickets.length; i++) {
+                const ticketExists = await this.ticketDatabase.getTicketById(input.tickets[i].ticketId)
+                
+                if (!ticketExists) {
+                    throw new TicketIdNotFound()
+                }
 
-            const ticketsAvailable = ticketIdExists.tickets_available - input.units
-            const ticketsSold = ticketIdExists.tickets_sold + input.units
+                if (input.tickets[i].units < 1) {
+                    throw new InvalidUnits()
+                }
 
-            await this.ticketDatabase.updateTicketInfo(input.ticketId, {tickets_available: ticketsAvailable, tickets_sold: ticketsSold})
+                const purchaseId = this.idGenerator.generateId()
+                const totalPrice = Number(input.tickets[i].units) * Number(ticketExists.price)
+                const newPurchase = new Purchase(purchaseId, id, input.tickets[i].ticketId, input.tickets[i].units, totalPrice)
 
+                await this.ticketDatabase.purchaseTicket(newPurchase)
+
+                const ticketsAvailable = ticketExists.tickets_available - input.tickets[i].units
+                const ticketsSold = ticketExists.tickets_sold + input.tickets[i].units
+
+                await this.ticketDatabase.updateTicketInfo(input.tickets[i].ticketId, {tickets_available: ticketsAvailable, tickets_sold: ticketsSold})
+            }
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }

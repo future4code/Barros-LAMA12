@@ -29,8 +29,7 @@ export class TicketController {
     async purchaseTicket (req: Request, res: Response): Promise<void> {
         try {
             const input: inputPurchaseTicketDTO = {
-                ticketId: req.body.ticketId,
-                units: Number(req.body.units),
+                tickets: req.body.tickets,
                 token: req.headers.authorization as string
             }
 

@@ -149,12 +149,15 @@ describe("Testing the create ticket method", () => {
 
 
 describe("Testing the purchase ticket method", () => {
-    test("Should not receive the ticketId and return a custom error", async () => {
+    test("Should not receive a ticketId and return a custom error", async () => {
         expect.assertions(3)
         
+        const tickets = [
+            {ticketId: "", units: 2},
+            {ticketId: "ticketId1", units: 1}
+        ]
         const input = {
-            ticketId: "",
-            units: 2,
+            tickets,
             token: "token"   
         }
 
@@ -162,8 +165,8 @@ describe("Testing the purchase ticket method", () => {
             await ticketBusiness.purchaseTicket(input)
         } catch (error: any) {
             expect(error).toBeInstanceOf(CustomError)
-            expect(error.statusCode).toBe(422)
-            expect(error.message).toBe("Provide the id of the ticket.")
+            expect(error.statusCode).toBe(404)
+            expect(error.message).toBe("Ticket id not found.")
         }
     })
 
@@ -171,8 +174,9 @@ describe("Testing the purchase ticket method", () => {
         expect.assertions(3)
         
         const input = {
-            ticketId: "ticketId35",
-            units: 2,
+            tickets: [
+                {ticketId: "ticketId35", units: 2}
+            ],
             token: "token"   
         }
 
@@ -189,8 +193,9 @@ describe("Testing the purchase ticket method", () => {
         expect.assertions(3)
         
         const input = {
-            ticketId: "ticketId2",
-            units: -2,
+            tickets: [
+                {ticketId: "ticketId2", units: -2}
+            ],
             token: "token"   
         }
 
@@ -205,8 +210,10 @@ describe("Testing the purchase ticket method", () => {
 
     test("Should receive a valid input and NOT return a custom error", async () => {
         const input = {
-            ticketId: "ticketId2",
-            units: 2,
+            tickets: [
+                {ticketId: "ticketId1", units: 2},
+                {ticketId: "ticketId2", units: 3}
+            ],
             token: "token"   
         }
 
