@@ -48,11 +48,15 @@ export class InvalidTicketsAvailable extends CustomError {
     }
 }
 
-
-
 export class InvalidUnits extends CustomError {
     constructor () {
         super (422, "The number of tickets must be higher than zero.")
+    }
+}
+
+export class UnitsNotAvailable extends CustomError {
+    constructor () {
+        super (422, "The number of units exceeds the number of tickets available.")
     }
 }
 

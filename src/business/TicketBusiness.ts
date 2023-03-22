@@ -1,6 +1,6 @@
 import { ConcertIdNotFound, InvalidWeekDay, MissingConcertId, MissingWeekDay } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
-import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTickets, MissingTicketsAvailable, NoPurchasesFound, NoTicketsFound, TicketIdNotFound } from "../error/TicketErrors"
+import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTickets, MissingTicketsAvailable, NoPurchasesFound, NoTicketsFound, TicketIdNotFound, UnitsNotAvailable } from "../error/TicketErrors"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
@@ -82,9 +82,11 @@ export class TicketBusiness {
                 if (!ticketExists) {
                     throw new TicketIdNotFound()
                 }
-
                 if (input.tickets[i].units < 1) {
                     throw new InvalidUnits()
+                }
+                if (input.tickets[i].units > ticketExists.tickets_available) {
+                    throw new UnitsNotAvailable()
                 }
 
                 const purchaseId = this.idGenerator.generateId()
