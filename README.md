@@ -6,6 +6,7 @@ This project was developed to simulate a software that manages a music festival 
 ## Endpoints
 - Signup
 - Login
+- Get Account Info
 - Create Band
 - Create Concert
 - Create Ticket
@@ -22,6 +23,7 @@ This project was developed to simulate a software that manages a music festival 
 
 ## Technologies
 - Typescript
+- Express
 - Node.js
 - Jest.js
 - MySQL

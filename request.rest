@@ -20,6 +20,12 @@ Content-Type: application/json
 }
 
 
+### GET ACCOUNT INFO
+GET http://localhost:3003/users/account
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTYwNzIwOCwiZXhwIjoxNjc5NjEwODA4fQ.suyoGcZflQn84QU4IEFl8Wc6jbKN0H28SQAujFeYdU0
+Content-Type: application/json
+
+
 ### CREATE BAND
 POST http://localhost:3003/bands/create
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODYzNTAyMCwiZXhwIjoxNjc4NjM4NjIwfQ.cmZc9EXnZ52v4yQdK9-0dEdfc6m0PQoPVRjFxquHM8o

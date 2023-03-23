@@ -1,9 +1,9 @@
 import { CustomError } from "../error/CustomError"
-import { DuplicateEmail, EmailNotFound, IncorrectPassword, InvalidEmail, InvalidPassword, MissingEmail, MissingPassword, MissingUserName, MissingUserRole } from "../error/UserErrors"
+import { DuplicateEmail, EmailNotFound, IncorrectPassword, InvalidEmail, InvalidPassword, MissingEmail, MissingPassword, MissingToken, MissingUserName, MissingUserRole, UserNotFound } from "../error/UserErrors"
 import { IAuthenticator } from "../model/IAuthenticator"
 import { IHashManager } from "../model/IHashManager"
 import { IIdGenerator } from "../model/IIdGenerator"
-import { inputSignUpDTO, loginInputDTO, User, USER_ROLES } from "../model/User"
+import { inputSignUpDTO, loginInputDTO, outputGetAccountInfoDTO, User, USER_ROLES } from "../model/User"
 import { UserRepository } from "../model/Repositories/UserRepository"
 
 
@@ -82,6 +82,34 @@ export class UserBusiness {
 
             const token = this.authenticator.generateToken({ id: emailExists.id, role: emailExists.role})
             return token
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
+    async getAccountInfo (token: string): Promise<outputGetAccountInfoDTO> {
+        try {
+            if (!token) {
+                throw new MissingToken()
+            }
+            
+            const {id, role} = await this.authenticator.getTokenData(token)            
+
+            const result = await this.userDatabase.getUserBy("id", id)
+            if (!result) {
+                throw new UserNotFound()
+            }
+
+            const user = {
+                id: result.id,
+                name: result.name,
+                email: result.email,
+                role: result.role
+            }
+
+            return user
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)

@@ -7,6 +7,12 @@ export class Unauthorized extends CustomError {
     }
 }
 
+export class UserNotFound extends CustomError {
+    constructor () {
+        super (404, "User id not found.")
+    }
+}
+
 export class MissingToken extends CustomError {
     constructor () {
         super (422, "Provide the token.")

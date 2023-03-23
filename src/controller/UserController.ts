@@ -33,11 +33,23 @@ export class UserController {
             }
 
             const token = await this.userBusiness.login(input)
-            res.status(200).send({ token })
+            res.status(201).send({ token })
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
     }
 
+
+    async getAccountInfo (req: Request, res: Response): Promise<void> {
+        try {
+            const token = req.headers.authorization as string
+
+            const result = await this.userBusiness.getAccountInfo(token)
+            res.status(200).send(result)
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
 }

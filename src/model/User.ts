@@ -30,3 +30,10 @@ export interface loginInputDTO {
     email: string,
     password: string
 }
+
+export interface outputGetAccountInfoDTO {
+    id: string,
+    name: string,
+    email: string,
+    role: USER_ROLES
+}
