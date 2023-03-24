@@ -10,4 +10,8 @@ export class BandDatabaseMock implements BandRepository {
         const result = bands.filter(item => item.id === value || item.name === value)
         return result[0]
     }
+
+    async getAllBands (): Promise<Band[]> {
+        return bands
+    }
 }
