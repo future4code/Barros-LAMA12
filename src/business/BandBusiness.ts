@@ -87,4 +87,14 @@ export class BandBusiness {
             throw new CustomError(error.statusCode, error.message)
         }
     }
+
+
+    async getAllBands (): Promise<Band[]> {
+        try {
+            const result = await this.bandDatabase.getAllBands()
+            return result
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
 }

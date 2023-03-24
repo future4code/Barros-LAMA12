@@ -39,4 +39,14 @@ export class BandController {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
     }
+
+
+    async getAllBands (req: Request, res: Response): Promise<void> {
+        try {
+            const result = await this.bandBusiness.getAllBands()
+            res.status(200).send(result)
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
 }

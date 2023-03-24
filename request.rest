@@ -43,6 +43,11 @@ GET http://localhost:3003/bands/info?name=skank
 Content-Type: application/json
 
 
+### GET ALL BANDS
+GET http://localhost:3003/bands
+Content-Type: application/json
+
+
 ### CREATE CONCERT
 POST http://localhost:3003/concerts/create
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgxODc2OCwiZXhwIjoxNjc4ODIyMzY4fQ.2ubKxzcP2duHm5_IpZiy0H96Tcg6pbWYikmJAfW50HU
@@ -96,14 +101,14 @@ Content-Type: application/json
 
 ### PURCHASE TICKET
 POST http://localhost:3003/tickets/purchase
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTUxMTQ3MywiZXhwIjoxNjc5NTE1MDczfQ.HAVCcNDP7zgp9T50ylrPiPTymVQRH13dMsQDEvmoTYQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTY2NDYzOCwiZXhwIjoxNjc5NjY4MjM4fQ.yDpWg7T8N0X0yeAZ-MM8XbWiJSTDhjGonseooooKCak
 Content-Type: application/json
 
 {
     "tickets": [
         {
             "ticketId": "1a98c6c5-27c2-478f-b147-308dfb20cb5f",
-            "units": 1
+            "units": 10
         }
     ]
 }

@@ -24,4 +24,13 @@ export class BandDatabase extends BaseDatabase implements BandRepository {
             throw new CustomError(error.statusCode, error.message)
         }
     }
+
+
+    async getAllBands (): Promise<Band[]> {
+        try {
+            return await BaseDatabase.connection(this.TABLE_NAME).select()
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
 }
