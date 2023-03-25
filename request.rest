@@ -72,7 +72,7 @@ Content-Type: application/json
 
 
 ### GET ALL CONCERTS
-GET http://localhost:3003/concerts?weekDay=friday
+GET http://localhost:3003/concerts
 Content-Type: application/json
 
 

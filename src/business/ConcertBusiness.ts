@@ -68,10 +68,7 @@ export class ConcertBusiness {
 
     async getAllConcerts (weekDay: string): Promise<outputGetAllConcertsDTO[]> {
         try {
-            if (!weekDay) {
-                throw new MissingWeekDay()
-            }
-            if (weekDay.toLowerCase() !== "friday" && weekDay.toLowerCase() !== "saturday" && weekDay.toLowerCase() !== "sunday") {
+            if (weekDay && weekDay.toLowerCase() !== "friday" && weekDay.toLowerCase() !== "saturday" && weekDay.toLowerCase() !== "sunday") {
                 throw new InvalidWeekDay()
             }
 

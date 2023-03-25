@@ -32,10 +32,17 @@ export class ConcertDatabase extends BaseDatabase implements ConcertRepository {
 
     async getAllConcerts (weekDay: string): Promise<outputGetAllConcertsDTO[]> {
         try {
-            return await BaseDatabase.connection(this.TABLE_NAME)
-            .join("LAMA_BANDS", "LAMA_CONCERTS.band_id", "=", "LAMA_BANDS.id")
-            .select("LAMA_CONCERTS.id", "LAMA_CONCERTS.week_day", "LAMA_CONCERTS.start_time", "LAMA_CONCERTS.end_time", "LAMA_BANDS.name", "LAMA_BANDS.music_genre")
-            .where("week_day", weekDay).orderBy("start_time")
+            if (weekDay === "") {
+                return await BaseDatabase.connection(this.TABLE_NAME)
+                .join("LAMA_BANDS", "LAMA_CONCERTS.band_id", "=", "LAMA_BANDS.id")
+                .select("LAMA_CONCERTS.id", "LAMA_CONCERTS.week_day", "LAMA_CONCERTS.start_time", "LAMA_CONCERTS.end_time", "LAMA_BANDS.name", "LAMA_BANDS.music_genre")
+                .where("week_day", weekDay).orderBy("start_time")
+            } else {
+                return await BaseDatabase.connection(this.TABLE_NAME)
+                .join("LAMA_BANDS", "LAMA_CONCERTS.band_id", "=", "LAMA_BANDS.id")
+                .select("LAMA_CONCERTS.id", "LAMA_CONCERTS.week_day", "LAMA_CONCERTS.start_time", "LAMA_CONCERTS.end_time", "LAMA_BANDS.name", "LAMA_BANDS.music_genre")
+                .orderBy("start_time")
+            }
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }

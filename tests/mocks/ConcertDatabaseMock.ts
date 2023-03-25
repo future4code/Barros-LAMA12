@@ -17,9 +17,12 @@ export class ConcertDatabaseMock implements ConcertRepository {
     }
 
     async getAllConcerts (weekDay: string): Promise<outputGetAllConcertsDTO[]> {
-        return concerts.filter(item => item.week_day === weekDay)
+        if (weekDay === "") {
+            return concerts
+        } else {
+            return concerts.filter(item => item.week_day === weekDay)
+        }
     }
-
 
     async getConcertById (id: string): Promise<any> {
         const result = concerts.filter(item => item.id === id)
