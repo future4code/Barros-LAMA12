@@ -1,0 +1,147 @@
+### SIGNUP
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "João Pedro Soares",
+    "email": "jp.soares@gmail.com",
+    "password": "12345678",
+    "role": "ADMIN"
+}
+
+
+### LOGIN
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "jp.soares@gmail.com",
+    "password": "12345678"
+}
+
+
+### GET ACCOUNT INFO
+GET http://localhost:3003/users/account
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTYwNzIwOCwiZXhwIjoxNjc5NjEwODA4fQ.suyoGcZflQn84QU4IEFl8Wc6jbKN0H28SQAujFeYdU0
+Content-Type: application/json
+
+
+### CREATE BAND
+POST http://localhost:3003/bands/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODYzNTAyMCwiZXhwIjoxNjc4NjM4NjIwfQ.cmZc9EXnZ52v4yQdK9-0dEdfc6m0PQoPVRjFxquHM8o
+Content-Type: application/json
+
+{
+    "name": "Calypso",
+    "musicGenre": "Calypso",
+    "responsible": "Joelma"
+}
+
+
+### GET BAND INFO
+GET http://localhost:3003/bands/info?name=skank
+Content-Type: application/json
+
+
+### GET ALL BANDS
+GET http://localhost:3003/bands
+Content-Type: application/json
+
+
+### CREATE CONCERT
+POST http://localhost:3003/concerts/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgxODc2OCwiZXhwIjoxNjc4ODIyMzY4fQ.2ubKxzcP2duHm5_IpZiy0H96Tcg6pbWYikmJAfW50HU
+Content-Type: application/json
+
+{
+    "weekDay": "saturday",
+    "startTime": "9:00:00",
+    "endTime": "11:00:00",
+    "bandId": "6de48ecb-3583-4a73-bab1-3161a5ca4884"
+}
+
+
+### UPDATE CONCERT
+PUT http://localhost:3003/concerts/7e1b3d15-7df5-41a3-a5c4-73897023ba5e
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgyODU2MywiZXhwIjoxNjc4ODMyMTYzfQ.DEDy1AaF7_8uv09Z4doU-ed0Bjdj8Q4aqKMAfsycQXA
+Content-Type: application/json
+
+{
+    "startTime": "08:00:00"
+}
+
+
+### GET ALL CONCERTS
+GET http://localhost:3003/concerts
+Content-Type: application/json
+
+
+### CREATE TICKET
+POST http://localhost:3003/tickets/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTk1MjMyMCwiZXhwIjoxNjc5OTU1OTIwfQ.AWlFzDVNRvV6reYFpLLl27-PPq4iskRVKw6-hQqgYMo
+Content-Type: application/json
+
+{
+    "ticketName": "Skank: Tour Brasil",
+    "ticketsAvailable": 25000,
+    "price": 200,
+    "concertId": "aafe5f75-779c-48dd-9377-341e0f2ff76a"
+}
+
+
+### EDIT TICKET PRICE
+PATCH http://localhost:3003/tickets/edit/72b86867-777d-414d-81be-ca76e0daf7ff
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgxNjk0MiwiZXhwIjoxNjc4ODIwNTQyfQ.UJ7HBP5s6KE_fstck_O_WELQRsTHHbMXIIoZNlYZ-fM
+Content-Type: application/json
+
+{
+    "price": 220
+}
+
+
+### PURCHASE TICKET
+POST http://localhost:3003/tickets/purchase
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTY2NDYzOCwiZXhwIjoxNjc5NjY4MjM4fQ.yDpWg7T8N0X0yeAZ-MM8XbWiJSTDhjGonseooooKCak
+Content-Type: application/json
+
+{
+    "tickets": [
+        {
+            "ticketId": "1a98c6c5-27c2-478f-b147-308dfb20cb5f",
+            "units": 10
+        }
+    ]
+}
+
+
+### GET ALL PURCHASES BY USER ID
+GET http://localhost:3003/tickets/purchases
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5MmU5OGU4LTMzNDItNGYzMC05ZDIwLTc4NTE1ZWM4YzJkNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzg3OTg0MDksImV4cCI6MTY3ODgwMjAwOX0.sA7-V6cFUmWhhrvbtsHbcDLnXjIvbR-6CUFdi2jgGPk
+Content-Type: application/json
+
+
+### GET ALL TICKETS
+GET http://localhost:3003/tickets?weekDay=friday
+Content-Type: application/json
+
+
+### CREATE PHOTO
+POST http://localhost:3003/photos/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyODYwMiwiZXhwIjoxNjc4NzMyMjAyfQ.1RA9o7TjMn65hVNczQy_jX69gFgzy6hJ7gmMYH-a7pQ
+Content-Type: application/json
+
+{
+    "photoUrl": "https://fastly.picsum.photos/id/158/4836/3224.jpg?hmac=Gu_3j3HxZgR74iw1sV0wcwlnSZSeCi7zDWLcjblOp_c",
+    "weekDay": "friday"
+}
+
+
+### GET ALL PHOTOS
+GET http://localhost:3003/photos?weekDay=friday
+Content-Type: application/json
+
+
+### DELETE PHOTO
+DELETE http://localhost:3003/photos/7b348645-40fb-4191-9a63-4981a2f20c86
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODcyODYwMiwiZXhwIjoxNjc4NzMyMjAyfQ.1RA9o7TjMn65hVNczQy_jX69gFgzy6hJ7gmMYH-a7pQ
+Content-Type: application/json

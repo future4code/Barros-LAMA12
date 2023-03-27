@@ -1,0 +1,46 @@
+{
+  "name": "barros-lama12",
+  "version": "1.0.0",
+  "description": "Como você deve saber muito bem, o nosso querido chefinho Astrodev é uma pessoa com Networking incrível e ele conhece vários artistas estrelados. Além disso, ele também é um grande ~~megalomaníaco~~ visionário e está planejando fazer um grande evento: o **LAMA**, *Labenu Musical Awards*, um festival  com várias bandas famosas para a formatura da sua turma e, no final, vocês podem eleger a banda que mais gostaram! Entretanto, na opinião dele, vocês só serão merecedores se entregarem um sistema impecável que permita o gerenciamento completo desses shows.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev ./src/index.ts",
+    "start": "tsc && node ./build/src/index.js",
+    "migrations": "ts-node-dev ./src/migrations/migrations.ts",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future4code/Barros-LAMA12.git"
+  },
+  "author": "Francine Hahn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/future4code/Barros-LAMA12/issues"
+  },
+  "homepage": "https://github.com/future4code/Barros-LAMA12#readme",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.4.2",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^18.15.0",
+    "@types/uuid": "^9.0.1",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
+    "mysql": "^2.18.1",
+    "uuid": "^9.0.0"
+  }
+}
