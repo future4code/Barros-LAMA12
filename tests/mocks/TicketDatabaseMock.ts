@@ -20,6 +20,11 @@ export class TicketDatabaseMock implements TicketRepository {
         return tickets.filter(item => item.week_day === weekDay)
     }
 
+    async getTicketByConcertId (concertId: string): Promise<any> {
+        const result = tickets.filter(item => item.concert_id === concertId)
+        return result[0]
+    }
+
     async getAllPurchasesByUserId (id: string): Promise<any> {
         return purchases.filter(item => item.user_id === id)
     }

@@ -71,3 +71,9 @@ export class NoPurchasesFound extends CustomError {
         super (404, "No purchases were found for the provided user id.")
     }
 }
+
+export class DuplicateTicket extends CustomError {
+    constructor () {
+        super (409, "There is already a registered ticket for this concert.")
+    }
+}

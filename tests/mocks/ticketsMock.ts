@@ -16,14 +16,5 @@ export const tickets = [
         tickets_sold: 0,
         week_day: "friday",
         concert_id: "concertId1"
-    },
-    {
-        id: "ticketId3",
-        ticket_name: "Nome do ticket 3",
-        price: 250,
-        tickets_available: 20000,
-        tickets_sold: 0,
-        week_day: "saturday",
-        concert_id: "concertId3"
     }
 ]

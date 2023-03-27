@@ -19,7 +19,7 @@ describe("Testing the create ticket method", () => {
         const input = {
             ticketName: "Ticket name",
             price: 250,
-            concertId: "concertId2",
+            concertId: "concertId3",
             ticketsAvailable: 20000,
             token: ""
         }
@@ -39,7 +39,7 @@ describe("Testing the create ticket method", () => {
         const input = {
             ticketName: "Ticket name",
             price: 250,
-            concertId: "concertId2",
+            concertId: "concertId3",
             ticketsAvailable: 20000,
             token: "invalidToken"
         }
@@ -59,7 +59,7 @@ describe("Testing the create ticket method", () => {
         const input = {
             ticketName: "",
             price: 250,
-            concertId: "concertId2",
+            concertId: "concertId3",
             ticketsAvailable: 20000,
             token: "token"
         }
@@ -90,6 +90,26 @@ describe("Testing the create ticket method", () => {
             expect(error).toBeInstanceOf(CustomError)
             expect(error.statusCode).toBe(404)
             expect(error.message).toBe("Concert id not found.")
+        }
+    })
+
+    test("Should receive a concertId that already has a ticket registered and return a custom error", async () => {
+        expect.assertions(3)
+        
+        const input = {
+            ticketName: "Nome do ticket",
+            price: 250,
+            concertId: "concertId2",
+            ticketsAvailable: 20000,
+            token: "token"
+        }
+        
+        try {
+            await ticketBusiness.createTicket(input)
+        } catch (error: any) {
+            expect(error).toBeInstanceOf(CustomError)
+            expect(error.statusCode).toBe(409)
+            expect(error.message).toBe("There is already a registered ticket for this concert.")
         }
     })
 
@@ -137,7 +157,7 @@ describe("Testing the create ticket method", () => {
         const input = {
             ticketName: "Nome do ticket",
             price: 250,
-            concertId: "concertId2",
+            concertId: "concertId3",
             ticketsAvailable: 20000,
             token: "token"
         }

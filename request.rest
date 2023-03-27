@@ -78,7 +78,7 @@ Content-Type: application/json
 
 ### CREATE TICKET
 POST http://localhost:3003/tickets/create
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5MmU5OGU4LTMzNDItNGYzMC05ZDIwLTc4NTE1ZWM4YzJkNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzg3MjU4MzIsImV4cCI6MTY3ODcyOTQzMn0.GFcCVBgcvfMa3_-m27csS_2H7ozouYbyhGLD6wncuwM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyZDE2MmM5LTcwZjMtNDY0Ny05MDQ0LWI2NTc5NzRlODMzOSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTk1MjMyMCwiZXhwIjoxNjc5OTU1OTIwfQ.AWlFzDVNRvV6reYFpLLl27-PPq4iskRVKw6-hQqgYMo
 Content-Type: application/json
 
 {

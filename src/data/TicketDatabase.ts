@@ -59,6 +59,16 @@ export class TicketDatabase extends BaseDatabase implements TicketRepository {
     }
 
 
+    async getTicketByConcertId (concertId: string): Promise<any> {
+        try {
+            const result = await BaseDatabase.connection(this.TABLE_NAME).select().where("concert_id", concertId)
+            return result[0]
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    }
+
+
     async getAllPurchasesByUserId (id: string): Promise<any> {
         try {
             return await BaseDatabase.connection("LAMA_PURCHASES")

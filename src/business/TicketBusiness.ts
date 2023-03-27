@@ -1,6 +1,6 @@
 import { ConcertIdNotFound, InvalidWeekDay, MissingConcertId, MissingWeekDay } from "../error/ConcertErrors"
 import { CustomError } from "../error/CustomError"
-import { InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTickets, MissingTicketsAvailable, NoPurchasesFound, NoTicketsFound, TicketIdNotFound, UnitsNotAvailable } from "../error/TicketErrors"
+import { DuplicateTicket, InvalidTicketPrice, InvalidTicketsAvailable, InvalidUnits, MissingTicketId, MissingTicketName, MissingTicketPrice, MissingTickets, MissingTicketsAvailable, NoPurchasesFound, NoTicketsFound, TicketIdNotFound, UnitsNotAvailable } from "../error/TicketErrors"
 import { MissingToken, Unauthorized } from "../error/UserErrors"
 import { ConcertRepository } from "../model/Repositories/ConcertRepository"
 import { IAuthenticator } from "../model/IAuthenticator"
@@ -51,6 +51,11 @@ export class TicketBusiness {
             const concertIdExists = await this.concertDatabase.getConcertById(input.concertId)
             if (!concertIdExists) {
                 throw new ConcertIdNotFound()
+            }
+
+            const duplicateTicket = await this.ticketDatabase.getTicketByConcertId(input.concertId)
+            if (duplicateTicket) {
+                throw new DuplicateTicket()
             }
 
             const ticketId = this.idGenerator.generateId()

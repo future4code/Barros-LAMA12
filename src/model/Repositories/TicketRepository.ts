@@ -9,4 +9,5 @@ export interface TicketRepository {
     updateTicketInfo (id: string, newInfo: any): Promise<void>
     getAllTickets (weekDay: string): Promise<any>
     getAllPurchasesByUserId (id: string): Promise<any>
+    getTicketByConcertId (concertId: string): Promise<any>
 }
