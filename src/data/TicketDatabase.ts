@@ -52,6 +52,7 @@ export class TicketDatabase extends BaseDatabase implements TicketRepository {
             .join("LAMA_BANDS", "LAMA_CONCERTS.band_id", "=", "LAMA_BANDS.id")
             .select("LAMA_TICKETS.id", "LAMA_TICKETS.ticket_name", "LAMA_TICKETS.price", "LAMA_TICKETS.tickets_available", "LAMA_TICKETS.tickets_sold", "LAMA_CONCERTS.week_day", "LAMA_CONCERTS.start_time", "LAMA_CONCERTS.end_time", "LAMA_BANDS.name as band_name", "LAMA_BANDS.music_genre")
             .where("week_day", weekDay)
+            .orderBy("start_time")
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }
